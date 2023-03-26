@@ -1,0 +1,5 @@
+rtc.c:25:6:MX_RTC_Init	4
+rtc.c:83:6:Get_RTC_All	3
+rtc.c:92:6:Print_RTC_To_UART	1
+rtc.c:102:7:RTC_To_Char	1
+rtc.c:109:6:Set_RTC_All	3
