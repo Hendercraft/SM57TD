@@ -93,16 +93,54 @@ void Print_RTC_To_UART(){
 	RTC_TimeTypeDef sTime = {0};
 	RTC_DateTypeDef sDate = {0};
 	Get_RTC_All(&sDate,&sTime,RTC_FORMAT_BIN);
-	char * msg = RTC_To_Char(&sDate,&sTime);
-	serial_puts(msg);
+	char * time = sTime_To_Char(&sTime);
+	char * date = sDate_To_Char(&sDate);
+	serial_puts("The date time is ");
+	serial_puts(date);
+	serial_puts("The current time is ");
+	serial_puts(time);
+	free(date);
+	free(time);
 
 
 }
 
-char* RTC_To_Char(RTC_DateTypeDef *sDate, RTC_TimeTypeDef *sTime){
+char* sTime_To_Char(RTC_TimeTypeDef *sTime){
 	char* hour_buffer = (char*) malloc(sizeof(char)*80);
 	sprintf(hour_buffer, "%02d:%02d:%02d\r\n", sTime->Hours, sTime->Minutes, sTime->Seconds);  // format time string
 	return hour_buffer;
+}
+
+char* sDate_To_Char(RTC_DateTypeDef *sDate){
+	char* date_buffer = (char*) malloc(sizeof(char)*80);
+	char day[3];
+	switch (sDate->WeekDay){
+		case RTC_WEEKDAY_MONDAY :
+			strcpy(day,"Mon");
+			break;
+		case RTC_WEEKDAY_TUESDAY :
+			strcpy(day,"Tue");
+			break;
+		case RTC_WEEKDAY_WEDNESDAY :
+			strcpy(day,"Wed");
+			break;
+		case RTC_WEEKDAY_THURSDAY :
+			strcpy(day,"Thu");
+			break;
+		case RTC_WEEKDAY_FRIDAY :
+			strcpy(day,"Fri");
+			break;
+		case RTC_WEEKDAY_SATURDAY :
+			strcpy(day,"Sat");
+			break;
+		case RTC_WEEKDAY_SUNDAY :
+			strcpy(day,"Sun");
+			break;
+		default :
+			strcpy(day,"Mon");
+	}
+	sprintf(date_buffer, "%s %02d-%02d-20%02d\r\n", day, sDate->Date, sDate->Month, sDate->Year);  // format date string
+	return date_buffer;
 }
 
 

@@ -19,10 +19,14 @@ void MX_RTC_Init(void);
 
 
 /*
- * This function convert the time and date given by the RTC struct into a string
+ * This function convert the time struct into a string
  */
-char* RTC_To_Char(RTC_DateTypeDef *sDate, RTC_TimeTypeDef *sTime);
+char* sTime_To_Char(RTC_TimeTypeDef *sTime);
 
+/*
+ * This function convert the date struct into a string
+ */
+char* sDate_To_Char(RTC_DateTypeDef *sDate);
 
 
 /*
