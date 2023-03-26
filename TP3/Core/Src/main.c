@@ -96,7 +96,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  Print_RTC_To_UART();
+	  Print_Time_And_Date_Usart();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

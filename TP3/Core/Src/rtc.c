@@ -5,16 +5,9 @@
  *      Author: hender
  */
 
-
-/*
- * THis function intialise the RTC register
- */
-
 #include "rtc.h"
-
+/*This structure will allow us to modify the RTC register*/
 RTC_HandleTypeDef hrtc;
-
-void Init_RTC();
 
 
 /**
@@ -47,7 +40,7 @@ void MX_RTC_Init(void)
   hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
   if (HAL_RTC_Init(&hrtc) != HAL_OK)
   {
-    Error_Handler();
+    RTC_Error_Handler();
   }
 
   /* USER CODE BEGIN Check_RTC_BKUP */
@@ -80,40 +73,48 @@ void MX_RTC_Init(void)
 
 }
 
-void Get_RTC_All(RTC_DateTypeDef *sDate,RTC_TimeTypeDef *sTime, uint32_t Format){
+void Read_Time_And_Date(RTC_DateTypeDef *sDate,RTC_TimeTypeDef *sTime, uint32_t Format){
 	if (HAL_RTC_GetTime(&hrtc,sTime,Format)!= HAL_OK){
-			Error_Handler();
+		RTC_Error_Handler();
 	}
 	if (HAL_RTC_GetDate(&hrtc,sDate,Format) != HAL_OK){
-		Error_Handler();
+		RTC_Error_Handler();
 	}
 }
 
-void Print_RTC_To_UART(){
+void Print_Time_And_Date_Usart(){
+	//Defining a Time and Date struct to read using HAL function
 	RTC_TimeTypeDef sTime = {0};
 	RTC_DateTypeDef sDate = {0};
-	Get_RTC_All(&sDate,&sTime,RTC_FORMAT_BIN);
-	char * time = sTime_To_Char(&sTime);
-	char * date = sDate_To_Char(&sDate);
+
+	//Reading
+	Read_Time_And_Date(&sDate,&sTime,RTC_FORMAT_BIN);
+
+	//Converting the result in the structs to readable string
+	char * time = sTime_To_String(&sTime);
+	char * date = sDate_To_String(&sDate);
+	//Writing tu Usart
 	serial_puts("The date time is ");
 	serial_puts(date);
 	serial_puts("The current time is ");
 	serial_puts(time);
+
+	//Freeing the buffer
 	free(date);
 	free(time);
 
 
 }
 
-char* sTime_To_Char(RTC_TimeTypeDef *sTime){
+char* sTime_To_String(RTC_TimeTypeDef *sTime){
 	char* hour_buffer = (char*) malloc(sizeof(char)*80);
 	sprintf(hour_buffer, "%02d:%02d:%02d\r\n", sTime->Hours, sTime->Minutes, sTime->Seconds);  // format time string
 	return hour_buffer;
 }
 
-char* sDate_To_Char(RTC_DateTypeDef *sDate){
+char* sDate_To_String(RTC_DateTypeDef *sDate){
 	char* date_buffer = (char*) malloc(sizeof(char)*80);
-	char day[3];
+	char day[4];
 	switch (sDate->WeekDay){
 		case RTC_WEEKDAY_MONDAY :
 			strcpy(day,"Mon");
@@ -145,13 +146,21 @@ char* sDate_To_Char(RTC_DateTypeDef *sDate){
 
 
 void Set_RTC_All(RTC_DateTypeDef *sDate, RTC_TimeTypeDef *sTime, uint32_t Format){
-	if (HAL_RTC_SetTime(&hrtc,sTime,Format)!= 0){
-		Error_Handler();
+	if (HAL_RTC_SetTime(&hrtc,sTime,Format)!= HAL_OK){
+		RTC_Error_Handler();
 	}
-	if (HAL_RTC_SetDate(&hrtc,sDate,Format) != 0){
-		Error_Handler();
+	if (HAL_RTC_SetDate(&hrtc,sDate,Format) != HAL_OK){
+		RTC_Error_Handler();
 	}
 
 }
 
+
+void RTC_Error_Handler()
+{
+  __disable_irq();
+  while (1)
+  {
+  }
+}
 

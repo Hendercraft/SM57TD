@@ -1,6 +1,7 @@
-rtc.c:25:6:MX_RTC_Init	4
-rtc.c:83:6:Get_RTC_All	3
-rtc.c:92:6:Print_RTC_To_UART	1
-rtc.c:108:7:sTime_To_Char	1
-rtc.c:114:7:sDate_To_Char	8
-rtc.c:147:6:Set_RTC_All	3
+rtc.c:18:6:MX_RTC_Init	4
+rtc.c:76:6:Read_Time_And_Date	3
+rtc.c:85:6:Print_RTC_To_UART	1
+rtc.c:109:7:sTime_To_String	1
+rtc.c:115:7:sDate_To_String	8
+rtc.c:148:6:Set_RTC_All	3
+rtc.c:159:6:RTC_Error_Handler	1

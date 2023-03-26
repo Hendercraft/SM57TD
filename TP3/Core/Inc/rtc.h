@@ -2,7 +2,8 @@
  * rtc.h
  *
  *  Created on: Mar 17, 2023
- *      Author: hender
+ *      Authors: Ruff Guillaume
+ *
  */
 
 #ifndef __RTC_H
@@ -11,51 +12,70 @@
 
 #include "stdio.h"
 #include "stdlib.h"
-#include "main.h"
-
-/*This structure will allow us to modify the RTC register*/
-
+#include "usart2.h"
+#include "stm32f4xx_hal.h"
+#include "string.h"
+/**
+  * @brief RTC Initialization Function
+  * @param None
+  * @retval None
+  */
 void MX_RTC_Init(void);
 
 
-/*
- * This function convert the time struct into a string
- */
-char* sTime_To_Char(RTC_TimeTypeDef *sTime);
+/**
+  * @brief Transform a RTC_TimeTypeDef to a printable string
+  * @param sTime, a pointer to a structure containing time information (see stm32f4xx_hal_rtc.h)
+  * @retval A string containing time info ready to be pushed to usart
+  */
+char* sTime_To_String(RTC_TimeTypeDef *sTime);
 
-/*
- * This function convert the date struct into a string
- */
-char* sDate_To_Char(RTC_DateTypeDef *sDate);
+/**
+  * @brief Transform a RTC_DateTypeDef to a printable string
+  * @param sDate, a pointer to a structure containing date information (see stm32f4xx_hal_rtc.h)
+  * @retval A string containing date info ready to be pushed to usart
+  */
+char* sDate_To_String(RTC_DateTypeDef *sDate);
 
 
-/*
- * This function fetch the time from the RTC clock and convert it to a string.
- * Then this string is sent by UART
- */
-void Print_RTC_To_UART();
+/**
+  * @brief Read the actual time and date form the RTC and print it to USART
+  * @param None
+  * @retval None
+  */
+void Print_Time_And_Date_Usart();
 
-/*
- * THis function intialise the RTC register 
- */
-void Init_RTC();
+/**
+  * @brief Read the time and date from RTC and put the data in sTime and sDate
+  * @param  sDate Pointer to Date structure
+  * @param  sTime Pointer to Time structure
+  * @param  Format Specifies the format of the entered parameters.
+  *         This parameter can be one of the following values:
+  *           @arg RTC_FORMAT_BIN: Binary data format
+  *           @arg RTC_FORMAT_BCD: BCD data format
+  * @retval None
+  */
+void Read_Time_And_Date(RTC_DateTypeDef *sDate,RTC_TimeTypeDef *sTime, uint32_t Format);
 
-/*
- * This function fetch the time from the RTC register and store them into the structs given in argument
- */
-void Get_RTC_All(RTC_DateTypeDef *sDate,RTC_TimeTypeDef *sTime, uint32_t Format);
+/**
+  * @brief  Sets RTC current time and date.
+  * @param  sDate Pointer to Date structure
+  * @param  sTime Pointer to Time structure
+  * @param  Format Specifies the format of the entered parameters.
+  *          This parameter can be one of the following values:
+  *            @arg RTC_FORMAT_BIN: Binary data format
+  *            @arg RTC_FORMAT_BCD: BCD data format
+  * @note this function will require a error handler
+  */
+void Set_Time_And_Date(RTC_DateTypeDef *sDate, RTC_TimeTypeDef *sTime, uint32_t Format);
 
-/*
- * This function set the rtc clock using *sTime and *sDate
- *
- */
-void Set_RTC(RTC_DateTypeDef *sDate, RTC_TimeTypeDef *sTime, uint32_t Format);
 
-/*
- * This function read the shadow register of RTC and return the current value
- *
- */
-uint32_t Read_RTC();
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void RTC_Error_Handler(void);
+
 
 #endif
 
