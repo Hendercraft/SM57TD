@@ -56,7 +56,7 @@ void MX_RTC_Init(void)
   sTime.StoreOperation = RTC_STOREOPERATION_RESET;
   if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
   {
-    Error_Handler();
+    RTC_Error_Handler();
   }
   sDate.WeekDay = RTC_WEEKDAY_FRIDAY;
   sDate.Month = RTC_MONTH_MARCH;
@@ -164,3 +164,10 @@ void RTC_Error_Handler()
   }
 }
 
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+	if (GPIO_Pin == GPIO_PIN_0)
+	  {
+		Print_Time_And_Date_Usart();
+	  }
+}

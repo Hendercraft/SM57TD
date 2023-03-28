@@ -28,12 +28,11 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include "rtc.h"
-#include "usart2.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "rtc.h"
+#include "usart2.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

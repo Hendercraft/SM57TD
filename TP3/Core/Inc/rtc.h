@@ -76,6 +76,7 @@ void Set_Time_And_Date(RTC_DateTypeDef *sDate, RTC_TimeTypeDef *sTime, uint32_t 
   */
 void RTC_Error_Handler(void);
 
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 
 #endif
 
