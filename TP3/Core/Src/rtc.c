@@ -2,7 +2,7 @@
  * rtc.c
  *
  *  Created on: Mar 17, 2023
- *      Author: hender
+ *      Author: RUFF CHIROSSEL FAURE
  */
 
 #include "rtc.h"
@@ -11,7 +11,7 @@ RTC_HandleTypeDef hrtc;
 
 
 /**
-  * @brief RTC Initialization Function
+  * @brief RTC Initialization Function generated from the graphic interface
   * @param None
   * @retval None
   */
@@ -21,7 +21,7 @@ void MX_RTC_Init(void)
   /* USER CODE BEGIN RTC_Init 0 */
 
   /* USER CODE END RTC_Init 0 */
-
+//structure definition where time and date are stocked
   RTC_TimeTypeDef sTime = {0};
   RTC_DateTypeDef sDate = {0};
 
@@ -74,6 +74,7 @@ void MX_RTC_Init(void)
 }
 
 void Read_Time_And_Date(RTC_DateTypeDef *sDate,RTC_TimeTypeDef *sTime, uint32_t Format){
+	//Get time and set a error message if the time hasn't been retrieved correctly
 	if (HAL_RTC_GetTime(&hrtc,sTime,Format)!= HAL_OK){
 		RTC_Error_Handler();
 	}
@@ -91,15 +92,16 @@ void Print_Time_And_Date_Usart(){
 	Read_Time_And_Date(&sDate,&sTime,RTC_FORMAT_BIN);
 
 	//Converting the result in the structs to readable string
+	//the input is a pointer to sTime and the result is Time_buffer defined by the funciton sTime_To_String
 	char * time = sTime_To_String(&sTime);
 	char * date = sDate_To_String(&sDate);
-	//Writing tu Usart
+	//Writing to Usart
 	serial_puts("The date time is ");
 	serial_puts(date);
 	serial_puts("The current time is ");
 	serial_puts(time);
 
-	//Freeing the buffer
+	//Freeing the buffer, buffer of the time and the date are defined with malloc that have to be freed
 	free(date);
 	free(time);
 
@@ -114,6 +116,7 @@ char* sTime_To_String(RTC_TimeTypeDef *sTime){
 
 char* sDate_To_String(RTC_DateTypeDef *sDate){
 	char* date_buffer = (char*) malloc(sizeof(char)*80);
+//day is a string of 3 characters + 1 null character for the end of the string
 	char day[4];
 	switch (sDate->WeekDay){
 		case RTC_WEEKDAY_MONDAY :
@@ -140,6 +143,8 @@ char* sDate_To_String(RTC_DateTypeDef *sDate){
 		default :
 			strcpy(day,"Mon");
 	}
+//%s for the format remplaced by the variable day, %02d remplace by date and month with a 0 is the date is 1 number
+//20%02d is the year (2 numbers) preceded with "20"
 	sprintf(date_buffer, "%s %02d-%02d-20%02d\r\n", day, sDate->Date, sDate->Month, sDate->Year);  // format date string
 	return date_buffer;
 }

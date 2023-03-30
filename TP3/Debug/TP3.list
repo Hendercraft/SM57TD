@@ -701,7 +701,7 @@ __STATIC_FORCEINLINE void __disable_irq(void)
 	...
 
 080006fc <MX_RTC_Init>:
-  * @brief RTC Initialization Function
+  * @brief RTC Initialization Function generated from the graphic interface
   * @param None
   * @retval None
   */
@@ -714,7 +714,7 @@ void MX_RTC_Init(void)
   /* USER CODE BEGIN RTC_Init 0 */
 
   /* USER CODE END RTC_Init 0 */
-
+//structure definition where time and date are stocked
   RTC_TimeTypeDef sTime = {0};
  8000702:	1d3b      	adds	r3, r7, #4
  8000704:	2200      	movs	r2, #0
@@ -849,6 +849,7 @@ void Read_Time_And_Date(RTC_DateTypeDef *sDate,RTC_TimeTypeDef *sTime, uint32_t 
  80007b6:	60f8      	str	r0, [r7, #12]
  80007b8:	60b9      	str	r1, [r7, #8]
  80007ba:	607a      	str	r2, [r7, #4]
+	//Get time and set a error message if the time hasn't been retrieved correctly
 	if (HAL_RTC_GetTime(&hrtc,sTime,Format)!= HAL_OK){
  80007bc:	687a      	ldr	r2, [r7, #4]
  80007be:	68b9      	ldr	r1, [r7, #8]
@@ -906,6 +907,7 @@ void Print_Time_And_Date_Usart(){
  8000810:	f7ff ffce 	bl	80007b0 <Read_Time_And_Date>
 
 	//Converting the result in the structs to readable string
+	//the input is a pointer to sTime and the result is Time_buffer defined by the funciton sTime_To_String
 	char * time = sTime_To_String(&sTime);
  8000814:	1d3b      	adds	r3, r7, #4
  8000816:	4618      	mov	r0, r3
@@ -916,7 +918,7 @@ void Print_Time_And_Date_Usart(){
  8000820:	4618      	mov	r0, r3
  8000822:	f000 f839 	bl	8000898 <sDate_To_String>
  8000826:	61b8      	str	r0, [r7, #24]
-	//Writing tu Usart
+	//Writing to Usart
 	serial_puts("The date time is ");
  8000828:	480a      	ldr	r0, [pc, #40]	; (8000854 <Print_Time_And_Date_Usart+0x64>)
  800082a:	f000 fa89 	bl	8000d40 <serial_puts>
@@ -930,7 +932,7 @@ void Print_Time_And_Date_Usart(){
  800083a:	69f8      	ldr	r0, [r7, #28]
  800083c:	f000 fa80 	bl	8000d40 <serial_puts>
 
-	//Freeing the buffer
+	//Freeing the buffer, buffer of the time and the date are defined with malloc that have to be freed
 	free(date);
  8000840:	69b8      	ldr	r0, [r7, #24]
  8000842:	f001 fe95 	bl	8002570 <free>
@@ -994,6 +996,7 @@ char* sDate_To_String(RTC_DateTypeDef *sDate){
  80008a2:	f001 fe5d 	bl	8002560 <malloc>
  80008a6:	4603      	mov	r3, r0
  80008a8:	60fb      	str	r3, [r7, #12]
+//day is a string of 3 characters + 1 null character for the end of the string
 	char day[4];
 	switch (sDate->WeekDay){
  80008aa:	687b      	ldr	r3, [r7, #4]
@@ -1058,6 +1061,8 @@ char* sDate_To_String(RTC_DateTypeDef *sDate){
  8000902:	4b0c      	ldr	r3, [pc, #48]	; (8000934 <sDate_To_String+0x9c>)
  8000904:	60bb      	str	r3, [r7, #8]
 	}
+//%s for the format remplaced by the variable day, %02d remplace by date and month with a 0 is the date is 1 number
+//20%02d is the year (2 numbers) preceded with "20"
 	sprintf(date_buffer, "%s %02d-%02d-20%02d\r\n", day, sDate->Date, sDate->Month, sDate->Year);  // format date string
  8000906:	687b      	ldr	r3, [r7, #4]
  8000908:	789b      	ldrb	r3, [r3, #2]
