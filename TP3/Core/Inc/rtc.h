@@ -23,7 +23,14 @@
   * @param None
   * @retval None
   */
-void MX_RTC_Init(void);
+void RTC_Init(void);
+
+/**
+  * @brief GPIO Initialization Function, init the pin PA0 for the button and activate its interrupts
+  * @param None
+  * @retval None
+  */
+void GPIO_Init(void);
 
 
 /**
@@ -89,6 +96,10 @@ void RTC_Error_Handler();
 
 
 
+/**
+  * @brief  This function is executed in case of a button press interrupt, you might need to setup the interrups via MX or manualy (EXTI0 intterrupts).
+  * @retval None
+  */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 
 #endif
