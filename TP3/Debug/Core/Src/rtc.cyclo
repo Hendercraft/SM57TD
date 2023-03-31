@@ -4,5 +4,6 @@ rtc.c:86:6:Print_Time_And_Date_Usart	1
 rtc.c:111:7:sTime_To_String	1
 rtc.c:117:7:sDate_To_String	8
 rtc.c:153:6:Set_RTC_All	3
-rtc.c:164:6:RTC_Error_Handler	1
-rtc.c:173:6:HAL_GPIO_EXTI_Callback	2
+rtc.c:162:6:Write_Time_Usart	5
+rtc.c:188:6:RTC_Error_Handler	1
+rtc.c:197:6:HAL_GPIO_EXTI_Callback	2

@@ -87,6 +87,7 @@ int main(void)
   MX_GPIO_Init();
   MX_RTC_Init();
   init_usart_int();
+
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */

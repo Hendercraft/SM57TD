@@ -4,5 +4,6 @@
 ../Core/Src/rtc.c:111:7:sTime_To_String	32	static
 ../Core/Src/rtc.c:117:7:sDate_To_String	32	static
 ../Core/Src/rtc.c:153:6:Set_RTC_All	24	static
-../Core/Src/rtc.c:164:6:RTC_Error_Handler	4	static,ignoring_inline_asm
-../Core/Src/rtc.c:173:6:HAL_GPIO_EXTI_Callback	16	static
+../Core/Src/rtc.c:162:6:Write_Time_Usart	32	static
+../Core/Src/rtc.c:188:6:RTC_Error_Handler	4	static,ignoring_inline_asm
+../Core/Src/rtc.c:197:6:HAL_GPIO_EXTI_Callback	16	static

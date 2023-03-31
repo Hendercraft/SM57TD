@@ -116,6 +116,16 @@ void newLine()
 }
 
 
+
+void USART_ReadString(uint8_t *pData, uint16_t Size)
+{
+    for (uint16_t i = 0; i < Size; i++)
+    {
+        while (!(USART2->SR & USART_SR_RXNE)) {} // wait until data is received
+        pData[i] = USART2->DR & 0xFF; // read received data byte
+    }
+}
+
 signed int string2int(char *s)
 {
    signed int result;
@@ -171,7 +181,7 @@ char * int2string(signed int num, char * s)
          num=temp;
      }
      if(sign==1) {
-         s[cnt]=0x2D;      							// caractère '-'
+         s[cnt]=0x2D;      							// caractï¿½re '-'
          cnt++;
      }
      for(i = 0;i<(int)(cnt/2);i++) {
@@ -180,7 +190,7 @@ char * int2string(signed int num, char * s)
          s[i]=s[cnt-i-1];        					// inverse le nombre
          s[cnt-i-1]=c;
      }
-     s[cnt]='\0';     								// met un terme à la chaîne de caractères
+     s[cnt]='\0';     								// met un terme ï¿½ la chaï¿½ne de caractï¿½res
      return s;
 }
 
@@ -208,7 +218,7 @@ char * float2string(float nombre,char *chaine)
 		nbf*=10;
 		nb=(int)nbf;
 
-		if(inc == -2) end=1; // convertie jusqu'à 2 chiffres après la virgule
+		if(inc == -2) end=1; // convertie jusqu'ï¿½ 2 chiffres aprï¿½s la virgule
 
 		nb%=10;
 

@@ -75,12 +75,19 @@ char* sDate_To_String(RTC_DateTypeDef *sDate);
   */
 void Set_Time_And_Date(RTC_DateTypeDef *sDate, RTC_TimeTypeDef *sTime, uint32_t Format);
 
+/**
+  * @brief  This ask the user to set the time and date
+  * @retval None
+  */
+void Write_Time_Usart();
 
 /**
   * @brief  This function is executed in case of error occurrence.
   * @retval None
   */
-void RTC_Error_Handler(void);
+void RTC_Error_Handler();
+
+
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 

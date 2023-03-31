@@ -157,8 +157,32 @@ void Set_RTC_All(RTC_DateTypeDef *sDate, RTC_TimeTypeDef *sTime, uint32_t Format
 	if (HAL_RTC_SetDate(&hrtc,sDate,Format) != HAL_OK){
 		RTC_Error_Handler();
 	}
-
 }
+
+void Write_Time_Usart(){
+	RTC_TimeTypeDef sTime = {0};
+	uint8_t data_buffer[3];
+	serial_puts("You will now set up the time \r\n");
+	do{
+		serial_puts("Please type the hour \r\n");
+		USART_ReadString(data_buffer,2);
+		serial_puts(data_buffer);
+
+	}while(sscanf(data_buffer,"%d",&sTime.Hours) != 1);
+	do{
+			serial_puts("Please type the minutes \r\n");
+			USART_ReadString(data_buffer,2);
+	}while(sscanf(data_buffer,"%d",&sTime.Minutes) != 1);
+	do{
+			serial_puts("Please type the seconds \r\n");
+			USART_ReadString(data_buffer,2);
+	}while(sscanf(data_buffer,"%d",&sTime.Seconds) != 1);
+
+	if (HAL_RTC_SetTime(&hrtc,&sTime,RTC_FORMAT_BCD)!= HAL_OK){
+			RTC_Error_Handler();
+		}
+}
+
 
 
 void RTC_Error_Handler()

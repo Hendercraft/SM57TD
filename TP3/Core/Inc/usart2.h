@@ -19,4 +19,13 @@ signed int string2int(char *s);
 char * int2string(signed int num, char * s);
 char * float2string(float nombre,char *chaine);
 
+/**
+  * @brief Read a desired number of byte from usart
+  * @param *pData pointer to the data buffer where the string will be store
+  * @param size of the buffer
+  *
+  * @retval None
+  */
+void USART_ReadString(uint8_t *pData, uint16_t size);
+
 #endif /* USART2_H_ */

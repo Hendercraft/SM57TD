@@ -7,6 +7,7 @@ usart2.c:54:6:init_usart_int	1
 usart2.c:95:6:serial_putc	3
 usart2.c:103:6:serial_puts	2
 usart2.c:112:6:newLine	1
-usart2.c:119:12:string2int	8
-usart2.c:154:8:int2string	5
-usart2.c:187:8:float2string	6
+usart2.c:120:6:USART_ReadString	3
+usart2.c:129:12:string2int	8
+usart2.c:164:8:int2string	5
+usart2.c:197:8:float2string	6
