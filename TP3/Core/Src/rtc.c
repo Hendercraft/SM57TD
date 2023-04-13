@@ -210,12 +210,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 
 void init_calendar(uint8_t hour, uint8_t minute, uint8_t second, uint8_t weekday, uint8_t day, uint8_t month, uint8_t year )
 {
-	int temps=0;
-	int datecomplete=0;
-	int jour=0;
-	int mois=0;
-
-
 	temps = hour;
 	temps=temps << 8;
 	temps |= minute;
