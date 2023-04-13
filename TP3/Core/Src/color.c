@@ -2,21 +2,17 @@
  * color.c
  *
  *  Created on: Apr 7, 2023
- *      Author: marie
+ *       Author: RUFF CHIROSSEL FAURE
  */
 
 #include "color.h"
 
 void ColorSensor_Init(){
-	init_I2C1();
-
 	ColorSensor_Send(_ENABLE,0b1);
-
 	//Setting the delay for RGBC at 2.4ms
 	ColorSensor_Send(_ATIME, 0xFF);
 	//Setting the gain at 1x
 	ColorSensor_Send(_CONTROL,_GAIN_x1);
-
 	//necessary delay for the sensor
 	HAL_Delay(3);
 }

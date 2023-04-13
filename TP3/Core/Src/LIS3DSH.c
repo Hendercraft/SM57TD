@@ -10,10 +10,8 @@
   */
 
 //include
-#include "main.h"
 #include "spi.h"
 #include "usart2.h"
-#include "LIS3DSH.h"
 
 int MOVE;
 int p;
@@ -41,7 +39,7 @@ int MASK1_A		= 0x5A;
 int SETT1		= 0x5B;
 
 void LIS302DL_init(void);
-void detecter(int p);
+uint16_t detecter(int p);
 void LIS3DSH_affiche(void);
 
 
@@ -90,8 +88,9 @@ void LIS3DSH_affiche(void)
  * Parameter in :
  * P [int] : sensitivity of the motion detection
  * */
-void detecter(int p)
+uint16_t  detecter(int p)
 {
+	uint16_t MOVE;
 	/*Initialisation de la variable MOVE*/
 	MOVE=0;
 
@@ -109,7 +108,7 @@ void detecter(int p)
   	{
   		MOVE=1;						//Incrémentation de la variable
   		newLine();					//Nouvelle line dans le terminal
-  		serial_puts(msg_RAM2);		//Affichage du message dans le terminal
+  		//serial_puts(msg_RAM2);		//Affichage du message dans le terminal
   	}
-
+  	return MOVE;
 }

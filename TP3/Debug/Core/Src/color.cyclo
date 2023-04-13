@@ -1,9 +1,9 @@
 color.c:10:6:ColorSensor_Init	1
-color.c:25:6:ColorSensor_Send	1
-color.c:33:9:ColorSensor_Recive	1
-color.c:42:10:ColorSensor_Recive_U16	1
-color.c:46:10:Read_Color	5
-color.c:67:15:Read_Color_All	1
-color.c:78:6:Convert_Color_To_RGBC	4
-color.c:87:6:Print_Color_To_Usart	1
-color.c:102:7:Rgbc_To_String	1
+color.c:21:6:ColorSensor_Send	1
+color.c:29:9:ColorSensor_Recive	1
+color.c:38:10:ColorSensor_Recive_U16	1
+color.c:42:10:Read_Color	5
+color.c:63:15:Read_Color_All	1
+color.c:74:6:Convert_Color_To_RGBC	4
+color.c:83:6:Print_Color_To_Usart	1
+color.c:98:7:Rgbc_To_String	1

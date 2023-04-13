@@ -2,7 +2,7 @@
  * color.h
  *
  *  Created on: 12 avr. 2023
- *      Author: marie
+ *      Author: RUFF CHIROSSEL FAURE
  */
 
 #ifndef COLORH

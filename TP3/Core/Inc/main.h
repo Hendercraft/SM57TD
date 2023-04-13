@@ -33,7 +33,10 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "rtc.h"
 #include "usart2.h"
-#include "color.h"
+#include "LIS3DSH.h"
+#include "spi.h"
+#include "DAC.h"
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

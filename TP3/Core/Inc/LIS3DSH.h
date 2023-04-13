@@ -22,6 +22,6 @@
 /*Functions Prototype */
 void LIS302DL_init(void);
 void LIS3DSH_affiche(void);
-void detecter(int p);
+uint16_t detecter(int p);
 
 #endif /* INC_LIS3DSH_H_ */

@@ -31,6 +31,7 @@ void RTC_Init(void)
 
   /** Initialize RTC Only
   */
+
   hrtc.Instance = RTC;
   hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
   hrtc.Init.AsynchPrediv = 127;
@@ -49,6 +50,7 @@ void RTC_Init(void)
 
   /** Initialize RTC and set the Time and Date
   */
+
   sTime.Hours = 0x0;
   sTime.Minutes = 0x0;
   sTime.Seconds = 0x0;
@@ -188,31 +190,6 @@ void Set_RTC_All(RTC_DateTypeDef *sDate, RTC_TimeTypeDef *sTime, uint32_t Format
 	}
 }
 
-void Write_Time_Usart(){
-	RTC_TimeTypeDef sTime = {0};
-	uint8_t data_buffer[3];
-	serial_puts("You will now set up the time \r\n");
-	do{
-		serial_puts("Please type the hour \r\n");
-		USART_ReadString(data_buffer,2);
-		serial_puts(data_buffer);
-
-	}while(sscanf(data_buffer,"%d",&sTime.Hours) != 1);
-	do{
-			serial_puts("Please type the minutes \r\n");
-			USART_ReadString(data_buffer,2);
-	}while(sscanf(data_buffer,"%d",&sTime.Minutes) != 1);
-	do{
-			serial_puts("Please type the seconds \r\n");
-			USART_ReadString(data_buffer,2);
-	}while(sscanf(data_buffer,"%d",&sTime.Seconds) != 1);
-
-	if (HAL_RTC_SetTime(&hrtc,&sTime,RTC_FORMAT_BCD)!= HAL_OK){
-			RTC_Error_Handler();
-		}
-}
-
-
 
 void RTC_Error_Handler()
 {
@@ -228,4 +205,42 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	  {
 		Print_Time_And_Date_Usart();
 	  }
+}
+
+
+void init_calendar(uint8_t hour, uint8_t minute, uint8_t second, uint8_t weekday, uint8_t day, uint8_t month, uint8_t year )
+{
+	int temps=0;
+	int datecomplete=0;
+	int jour=0;
+	int mois=0;
+
+
+	temps = hour;
+	temps=temps << 8;
+	temps |= minute;
+	temps=temps << 8;
+	temps |= second;
+
+	datecomplete = year << 16;
+	jour = weekday << 12;
+	datecomplete |= jour;
+	mois = month << 8;
+	datecomplete |= mois;
+	datecomplete |= day;
+
+
+	RCC->BDCR |= 0x1000; //Start the RTC
+	RTC->WPR =0xCAU; //Disable the RTC registers write protection
+	RTC->WPR =0x53U; //Disable the RTC registers write protection
+	RTC->ISR =0x80; //Enter Initialization mode
+	while(!(RTC->ISR & 0xBF)); //Wait for the confirmation of initialization mode (clock synchronization)
+	RTC->PRER =0xFF; //Program the prescaler values if needed
+	HAL_Delay(100); //permet de remettre la valeur de la clock à la valeur demandée
+	RTC->PRER |=0x7F0000; //Program the prescaler values if needed
+	RTC->TR =temps; //Load time values in the shadow registers
+	RTC->DR =datecomplete; //Load date values in the shadow registers
+	RTC->CR &=0xBF; //Configure the time format 24h
+	RTC->ISR &=0xFFFFFF7F; //Exit Initialization mode
+	RTC->WPR =0xFFU; //Enable the RTC Registers Write Protection
 }

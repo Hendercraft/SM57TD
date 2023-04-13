@@ -1,0 +1,5 @@
+../Core/Src/DAC.c:22:6:DAC_GPIO_Init	4	static
+../Core/Src/DAC.c:43:6:DAC_Power_Up	8	static
+../Core/Src/DAC.c:89:6:DAC_Power_Down	8	static
+../Core/Src/DAC.c:122:6:Beep_Config	16	static
+../Core/Src/DAC.c:157:6:Run_Alarm	8	static

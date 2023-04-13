@@ -40,13 +40,17 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c1;
 
+I2S_HandleTypeDef hi2s3;
 /* USER CODE BEGIN PV */
-
+GPIO_PinState Pbutton_state;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_I2S3_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -83,12 +87,30 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  GPIO_Init();
+  MX_GPIO_Init();
   RTC_Init();
-  init_usart_int();
-  ColorSensor_Init();
+  MX_I2S3_Init();
 
   /* USER CODE BEGIN 2 */
+
+  //User Init
+  init_I2C1();
+  DAC_GPIO_Init();
+  GPIO_Init();
+  init_usart_int();
+  init_SPI();
+  LIS302DL_init();
+
+  /*Use hexadecimal values except for the weekday
+  example : for 19h 01min 40s, Thursday, 13th, April, 2023 right as below
+  init_calendar(0x19, 0x1, 0x40, THU, 0x13, 0x4, 0x2023);
+  */
+  init_calendar(0x10, 0x15, 0x00, TUE, 0x14, 0x04, 0x2023);
+
+  //Mise en route du DAC
+  DAC_Power_Up();
+  //Configuration du beep
+  Beep_Config(SHORT_BEEP, SHORT_SILENCE, MEDIUM_SOUND);
 
   /* USER CODE END 2 */
 
@@ -96,10 +118,20 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  if (detecter(10)==1) // the card has been stolen
+	  {
+		  serial_puts("The card has been stolen : Here's the time and data and the color sensor data : \r\n");
+		  Print_Time_And_Date_Usart();
+		  Print_Color_To_Usart();
+		  while (1) // Run the alarm
+		  {
+			  Run_Alarm();
+		  }
+	  }
+   }
     /* USER CODE END WHILE */
-	  Print_Color_To_Usart();
+
     /* USER CODE BEGIN 3 */
-  }
   /* USER CODE END 3 */
 }
 
@@ -148,8 +180,69 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 }
+/**
+  * @brief I2S3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2S3_Init(void)
+{
 
+  /* USER CODE BEGIN I2S3_Init 0 */
 
+  /* USER CODE END I2S3_Init 0 */
+
+  /* USER CODE BEGIN I2S3_Init 1 */
+
+  /* USER CODE END I2S3_Init 1 */
+  hi2s3.Instance = SPI3;
+  hi2s3.Init.Mode = I2S_MODE_MASTER_TX;
+  hi2s3.Init.Standard = I2S_STANDARD_PHILIPS;
+  hi2s3.Init.DataFormat = I2S_DATAFORMAT_16B;
+  hi2s3.Init.MCLKOutput = I2S_MCLKOUTPUT_ENABLE;
+  hi2s3.Init.AudioFreq = I2S_AUDIOFREQ_8K;
+  hi2s3.Init.CPOL = I2S_CPOL_LOW;
+  hi2s3.Init.ClockSource = I2S_CLOCK_PLL;
+  hi2s3.Init.FullDuplexMode = I2S_FULLDUPLEXMODE_ENABLE;
+  if (HAL_I2S_Init(&hi2s3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2S3_Init 2 */
+
+  /* USER CODE END I2S3_Init 2 */
+
+}
+/**
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+/* USER CODE BEGIN MX_GPIO_Init_1 */
+/* USER CODE END MX_GPIO_Init_1 */
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  /*Configure GPIO pin : PA0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
+/* USER CODE BEGIN MX_GPIO_Init_2 */
+/* USER CODE END MX_GPIO_Init_2 */
+}
 
 /* USER CODE BEGIN 4 */
 

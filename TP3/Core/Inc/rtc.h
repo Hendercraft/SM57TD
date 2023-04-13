@@ -102,4 +102,35 @@ void RTC_Error_Handler();
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 
+/**
+  * @brief Initializing the calendar
+  * @param hour in hexa
+  * @param minutes in hexa
+  * @param second in hexa
+  * @param weekday with the macros below
+  * @param day in hexa
+  * @param month in hexa
+  * @param year in hexa
+  * @retval None
+  */
+
+/*Use hexadecimal values except for the weekday
+exemple : for 19h 01min 40s, Thursday, 13th, April, 2023 right as below
+init_calendar(0x19, 0x1, 0x40, THU, 0x13, 0x4, 0x2023);
+*/
+
+void init_calendar(uint8_t hour, uint8_t minute, uint8_t second, uint8_t weekday, uint8_t day, uint8_t month, uint8_t year );
+
+
+// ----- The macros below can be used in the 'config_calendar( )' function :
+
+#define MON				0b0010
+#define TUE				0b0100
+#define WEN				0b0110
+#define THU				0b1000
+#define FRI				0b1010
+#define SAT				0b1100
+#define SUN				0b1110
+
+
 #endif
