@@ -1,0 +1,6 @@
+color.c:10:6:ColorSensor_Init	1
+color.c:27:6:ColorSensor_Send	1
+color.c:35:9:ColorSensor_Recive	1
+color.c:44:10:ColorSensor_Recive_U16	1
+color.c:48:10:Read_Color	5
+color.c:69:15:Read_Color_All	1

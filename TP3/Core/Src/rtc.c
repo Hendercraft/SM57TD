@@ -65,7 +65,7 @@ void RTC_Init(void)
 
   if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
   {
-    Error_Handler();
+    RTC_Error_Handler();
   }
   /* USER CODE BEGIN RTC_Init 2 */
 

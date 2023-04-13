@@ -1,0 +1,4 @@
+../Core/Src/spi.c:11:6:init_SPI	40	static
+../Core/Src/spi.c:54:6:SPIwrite	16	static
+../Core/Src/spi.c:72:9:SPIrw	24	static
+../Core/Src/spi.c:95:9:SPIread	24	static

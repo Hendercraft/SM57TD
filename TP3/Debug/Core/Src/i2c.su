@@ -1,0 +1,4 @@
+../Core/Src/i2c.c:10:6:init_I2C1	4	static
+../Core/Src/i2c.c:55:6:I2C_Master_Transmit	24	static
+../Core/Src/i2c.c:104:6:I2C_Master_Receive	24	static
+../Core/Src/i2c.c:252:6:I2C_Slave_Receive	24	static

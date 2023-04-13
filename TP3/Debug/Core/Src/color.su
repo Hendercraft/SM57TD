@@ -1,0 +1,6 @@
+../Core/Src/color.c:10:6:ColorSensor_Init	8	static
+../Core/Src/color.c:27:6:ColorSensor_Send	24	static
+../Core/Src/color.c:35:9:ColorSensor_Recive	24	static
+../Core/Src/color.c:44:10:ColorSensor_Recive_U16	24	static
+../Core/Src/color.c:48:10:Read_Color	24	static
+../Core/Src/color.c:69:15:Read_Color_All	24	static

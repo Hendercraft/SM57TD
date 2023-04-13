@@ -29,23 +29,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  00020070  2**0
                   CONTENTS, READONLY
- 13 .debug_info   00006a61  00000000  00000000  000200a0  2**0
+ 13 .debug_info   00006a37  00000000  00000000  000200a0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 0000181d  00000000  00000000  00026b01  2**0
+ 14 .debug_abbrev 000017f5  00000000  00000000  00026ad7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00000638  00000000  00000000  00028320  2**3
+ 15 .debug_aranges 00000638  00000000  00000000  000282d0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_ranges 00000560  00000000  00000000  00028958  2**3
+ 16 .debug_ranges 00000560  00000000  00000000  00028908  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00021661  00000000  00000000  00028eb8  2**0
+ 17 .debug_macro  000023da  00000000  00000000  00028e68  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   000084a4  00000000  00000000  0004a519  2**0
+ 18 .debug_line   000084a4  00000000  00000000  0002b242  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000c633c  00000000  00000000  000529bd  2**0
+ 19 .debug_str    000c633c  00000000  00000000  000336e6  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000050  00000000  00000000  00118cf9  2**0
+ 20 .comment      00000050  00000000  00000000  000f9a22  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00001c58  00000000  00000000  00118d4c  2**2
+ 21 .debug_frame  00001c58  00000000  00000000  000f9a74  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -739,8 +739,8 @@ void RTC_Init(void)
  800070e:	2b00      	cmp	r3, #0
  8000710:	d001      	beq.n	8000716 <RTC_Init+0xa2>
   {
-    Error_Handler();
- 8000712:	f7ff ffa9 	bl	8000668 <Error_Handler>
+    RTC_Error_Handler();
+ 8000712:	f000 f91f 	bl	8000954 <RTC_Error_Handler>
   }
   /* USER CODE BEGIN RTC_Init 2 */
 
