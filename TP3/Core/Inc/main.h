@@ -33,6 +33,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "rtc.h"
 #include "usart2.h"
+#include "color.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

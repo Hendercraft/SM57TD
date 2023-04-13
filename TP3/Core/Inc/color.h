@@ -11,6 +11,9 @@
 #include "i2c.h"
 #include "stm32f4xx_hal.h"
 #include "usart2.h"
+#include "string.h"
+#include "stdlib.h"
+#include "stdio.h"
 
 // TCS3472 registers definition
 #define _ENABLE  0x00    // Enable status and interrupts
@@ -127,6 +130,18 @@ ColorStruct16 Read_Color_All();
   * @retval RGBC, A RGB value with the Clear value on 16
   */
 RGBC Convert_Color_To_RGBC(ColorStruct16 Colours);
+
+/**
+  * @brief Print the actual value red by the sensor to Usart
+  * @retval None
+  */
+void Print_Color_To_Usart();
+
+/**
+  * @brief Convert our RGBC data into a readable string
+  * @retval A string, containing RGBC data
+  */
+char* Rgbc_To_String(RGBC *rgbc_value);
 
 #endif
 

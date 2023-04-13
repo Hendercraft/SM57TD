@@ -86,6 +86,7 @@ int main(void)
   GPIO_Init();
   RTC_Init();
   init_usart_int();
+  ColorSensor_Init();
 
   /* USER CODE BEGIN 2 */
 
@@ -96,7 +97,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  Print_Color_To_Usart();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
