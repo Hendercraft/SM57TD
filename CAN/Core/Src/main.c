@@ -67,7 +67,8 @@ int main(void)
 	CAN_frame frame;
 
 	// Initialiser les champs de la structure
-	frame.STDID = 0x123;
+	frame.ID = 0x010;
+	frame.IDE = 0x0;
 	frame.RTR = 0;
 	frame.DLC = 4;
 	frame.data[0] = 0xAA;
@@ -97,17 +98,18 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
   CAN_GPIO_Init();
-  CAN_Config();
+  CAN_config(1,0,0,0,0,0); //32bit mode, list mode, ID = 0x010
   /* USER CODE END 2 */
-
+  __enable_irq();
   /* Infinite loop */
-  CAN_sendFrame(frame);
   /* USER CODE BEGIN WHILE */
+  int status = 0;
+  status = CAN_sendFrame(frame);
   while (1){
-
     /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
+    /* USER CODE BEGIN 3 *     */
+
   }
   /* USER CODE END 3 */
 }
