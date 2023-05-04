@@ -83,10 +83,10 @@ enum Color{
 ////////////////////////////////////////////////////////////
 
 
-/* This function initializes the I2C protocol and the necessary registers for the color sensor to communicate and to be written
- *
- *
- */
+/**
+  * @brief Initialise the Sensor, powering it up writing a 1 to the first bit of the enable register
+  * @retval None
+  */
 void ColorSensor_Init();
 
 /**
