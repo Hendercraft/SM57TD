@@ -10,11 +10,18 @@
 
 #include "stm32f407xx.h"
 
-GPIO_TypeDef * PB = GPIOB;
 
+typedef struct{
+	uint16_t STDID;
+	uint8_t RTR;
+	uint8_t DLC;
+	uint8_t data[8];
+}CAN_frame;
 
 void CAN_GPIO_Init();
 
+void CAN_Config();
 
+uint8_t CAN_sendFrame(CAN_frame CAN_mess);
 
 #endif /* INC_CAN_H_ */
