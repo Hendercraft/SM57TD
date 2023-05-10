@@ -67,8 +67,8 @@ int main(void)
 	CAN_frame frame;
 
 	// Initialiser les champs de la structure
-	frame.ID = 0x010;
-	frame.IDE = 0x0;
+	frame.ID = 0x524010;
+	frame.IDE = 0x1;
 	frame.RTR = 0;
 	frame.DLC = 4;
 	frame.data[0] = 0xAA;
@@ -95,10 +95,23 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
   CAN_GPIO_Init();
-  CAN_config(1,0,0,0,0,0); //32bit mode, list mode, ID = 0x010
+  UART_Init();
+
+  //2.3
+  //32bit mode, list mode
+  //ID = 0x010,standard ID, accept both data and request frame
+  //CAN_config(1,1,(0x10 << 5),0x2,(0x10 << 5),0x00);
+
+  //2.4
+  //32bit mode, list mode
+  //ID = 0x4524010,Extanded ID, accept both data and request frame
+  //uint32_t Filter_ID = (0x524010 << 3) | 0x6;
+  //uint32_t Mask_ID = (0x524010 << 3) | 0x4;
+  //CAN_config(1, 1, Filter_ID >> 16, Filter_ID & 0xFFFF, Mask_ID >> 16, Mask_ID & 0xFFFF);
+  //CAN_config(1, 0, 0x524, 0x010,0 , 0);
+
   /* USER CODE END 2 */
   __enable_irq();
   /* Infinite loop */
@@ -107,7 +120,7 @@ int main(void)
   status = CAN_sendFrame(frame);
   while (1){
     /* USER CODE END WHILE */
-
+	  UART_PutChar('5');
     /* USER CODE BEGIN 3 *     */
 
   }
@@ -157,24 +170,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-}
-
-/**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_GPIO_Init(void)
-{
-/* USER CODE BEGIN MX_GPIO_Init_1 */
-/* USER CODE END MX_GPIO_Init_1 */
-
-  /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOH_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-
-/* USER CODE BEGIN MX_GPIO_Init_2 */
-/* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */

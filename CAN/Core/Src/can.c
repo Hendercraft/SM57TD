@@ -66,19 +66,16 @@ void CAN_config(uint8_t IDE, uint8_t FBM, uint16_t Filter_ID_high, uint16_t Filt
 	//set filter in init mode
 	CAN1->FMR |= (0x1); //Mask mode
 
-	//Assign the message from filter 0 to FIFO0
-	CAN1->FA1R &= 0x0;
+	CAN1->FA1R |= 0x1;
 
-	CAN1->FFA1R |= 0x1;
+	//Assign the message from filter 0 to FIFO0
+	CAN1->FFA1R &= ~(0x1);
 
 	if (FBM == 0){
 		CAN1->FM1R &= ~(0x1); //Set filter 1 in mask mod
 	}else{
 		CAN1->FM1R |= 0x1; //Set filter 1 in list mod
 	}
-	//set filter in init mode
-	CAN1->FMR |= (0x1); //Mask mode
-
 
 	// configure filter mode based on IDE
 	if (IDE == 0){ // standard mode
@@ -148,6 +145,19 @@ void CAN1_RX0_IRQHandler(void)
         CAN_receiveCallback(CAN_mess);
         // clear the message from the FIFO
         CAN1->RF0R |= CAN_RF0R_RFOM0;
+    }
+}
+
+void CAN1_TX_IRQHandler(void){
+
+    // Check if transmission mailbox 0 is empty
+    if ((CAN1->TSR & CAN_TSR_TME0) == CAN_TSR_TME0)
+    {
+        // Send the next message in the transmission queue
+        // ...
+
+        // Clear the interrupt flag
+        CAN1->TSR |= CAN_TSR_TXOK0;
     }
 }
 

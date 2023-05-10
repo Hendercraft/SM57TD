@@ -2,6 +2,7 @@
 ../Drivers/CMSIS/Include/core_cm4.h:1816:22:__NVIC_SetPriority	16	static
 ../Core/Src/can.c:13:6:CAN_GPIO_Init	4	static
 ../Core/Src/can.c:33:6:CAN_config	24	static
-../Core/Src/can.c:101:9:CAN_sendFrame	32	static
-../Core/Src/can.c:127:6:CAN1_RX0_IRQHandler	32	static
-../Core/Src/can.c:155:6:CAN_receiveCallback	24	static
+../Core/Src/can.c:98:9:CAN_sendFrame	32	static
+../Core/Src/can.c:124:6:CAN1_RX0_IRQHandler	32	static
+../Core/Src/can.c:151:6:CAN1_TX_IRQHandler	4	static
+../Core/Src/can.c:165:6:CAN_receiveCallback	24	static

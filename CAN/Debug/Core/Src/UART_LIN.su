@@ -1,0 +1,7 @@
+../Core/Src/UART_LIN.c:14:6:UART_Init	8	static
+../Core/Src/UART_LIN.c:38:13:GPIO_Init	4	static
+../Core/Src/UART_LIN.c:66:6:SendMessage	16	static
+../Core/Src/UART_LIN.c:73:6:SendRequest	16	static
+../Core/Src/UART_LIN.c:81:6:sync_break	4	static
+../Core/Src/UART_LIN.c:88:6:UART_PutChar	16	static
+../Core/Src/UART_LIN.c:98:9:checksum	24	static

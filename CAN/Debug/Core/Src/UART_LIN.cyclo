@@ -1,0 +1,7 @@
+UART_LIN.c:14:6:UART_Init	1
+UART_LIN.c:38:13:GPIO_Init	1
+UART_LIN.c:66:6:SendMessage	1
+UART_LIN.c:73:6:SendRequest	1
+UART_LIN.c:81:6:sync_break	1
+UART_LIN.c:88:6:UART_PutChar	3
+UART_LIN.c:98:9:checksum	3
