@@ -23,8 +23,6 @@ typedef struct{
 
 struct CircularBuffer;  // Forward declaration
 
-static CAN_frame Counter;
-
 void CAN_Counter_Init();
 
 void CAN_GPIO_Init();

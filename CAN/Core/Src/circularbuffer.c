@@ -9,11 +9,12 @@ typedef struct CircularBuffer{
 	int bufferLenght;
 }CircularBuffer;
 
-CircularBuffer getNewBuffer(void){
-  CircularBuffer newbuffer;
-  newbuffer.readIndex = 0;
-  newbuffer.writeIndex = 0;
-  newbuffer.bufferLenght = 0;
+CircularBuffer* getNewBuffer(void){
+
+  CircularBuffer* newbuffer = (CircularBuffer*) malloc(sizeof(CircularBuffer));
+  newbuffer->readIndex = 0;
+  newbuffer->writeIndex = 0;
+  newbuffer->bufferLenght = 0;
   return newbuffer;
 }
 

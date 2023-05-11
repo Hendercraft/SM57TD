@@ -1,7 +1,7 @@
 
 #ifndef INC_CIRCULARBUFFER_H_
 #define INC_CIRCULARBUFFER_H_
-
+#include "stdlib.h"
 /* typedef struct{
 	int ID;
 	int IDE;
@@ -12,7 +12,7 @@
 typedef struct CircularBuffer CircularBuffer; //Forwad decleration
 
 
-CircularBuffer getNewBuffer(void);
+CircularBuffer* getNewBuffer(void);
 int pushToBuffer(CircularBuffer *buffer, void* frame);
 int pullFromBuffer(CircularBuffer *buffer, void** frame);
 

@@ -9,7 +9,8 @@
 #include "circularbuffer.h" //Avoiding circular dependency
 
 static GPIO_TypeDef * PB = GPIOB;
-
+static CAN_frame Counter;
+CircularBuffer* ReciveBuffer;
 
 void CAN_Counter_Init(){
 	Counter.ID = 0x010;
@@ -21,6 +22,7 @@ void CAN_Counter_Init(){
 
 void CAN_GPIO_Init(){
 
+	ReciveBuffer = getNewBuffer();
 	Configure_buttonInterrupt();
 	RCC->AHB1ENR |= 0x2; //gpio clock activation for can gpio B
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN; //for the led gpio D
@@ -210,14 +212,14 @@ void EXTI0_buttonpressCallback(){
 // Receive callback function to be implemented by user
 void CAN_receiveCallback(CAN_frame CAN_mess)
 {
-	/*int overwrite = pushToBuffer(Buffer,CAN_mess);
+	int overwrite = pushToBuffer(ReciveBuffer,(void**)&CAN_mess);
 	if (overwrite == 1){
 		serial_puts("Buffer is full, overwriting oldest message\r\n");
 	}
 	char stringbuffer[80];
 	CAN_frameToString(&CAN_mess,stringbuffer);
 	serial_puts(stringbuffer);
-	newLine();*/
+	newLine();
 }
 
 
