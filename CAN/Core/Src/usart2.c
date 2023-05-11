@@ -8,7 +8,7 @@
 #include "stm32f4xx_hal.h"
 #include "usart2.h"
 #include <string.h>
-#include <stdli.h>
+#include <stdlib.h>
 #include "can.h"
 
 
@@ -237,12 +237,10 @@ void USART2_IRQHandler(void) {
   if (USART2->SR & USART_SR_RXNE) {
     // Read the received data
     char data = USART2->DR;
-
     // Store the received character in the buffer
     rxBuffer[rxIndex] = data;
-
     // Check for the word "trame"
-    if (strcmp(rxBuffer,"trame") == 0){
+    if (rxIndex > 3 && rxBuffer[rxIndex] == 'e' &&  rxBuffer[rxIndex - 1] == 'm' && rxBuffer[rxIndex - 2] == 'a' && rxBuffer[rxIndex - 3] == 'r' && rxBuffer[rxIndex - 4] == 't') {
     	handleTrameReceived();
     }
 
