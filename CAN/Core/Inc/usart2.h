@@ -8,7 +8,6 @@
 #ifndef USART2_H_
 #define USART2_H_
 
-
 /*Functions Prototype */
 void init_usart(void);
 void init_usart_int(void);
@@ -18,5 +17,8 @@ void newLine();
 signed int string2int(char *s);
 char * int2string(signed int num, char * s);
 char * float2string(float nombre,char *chaine);
+
+void USART2_IRQHandler(void);
+void handleTrameReceived(void);
 
 #endif /* USART2_H_ */

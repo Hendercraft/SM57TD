@@ -2,11 +2,11 @@
 ../Drivers/CMSIS/Include/core_cm4.h:1816:22:__NVIC_SetPriority	16	static
 ../Core/Src/can.c:15:6:CAN_Counter_Init	4	static
 ../Core/Src/can.c:23:6:CAN_GPIO_Init	8	static
-../Core/Src/can.c:45:6:CAN_config	24	static
+../Core/Src/can.c:44:6:CAN_config	24	static
 ../Core/Src/can.c:109:6:Configure_buttonInterrupt	8	static
 ../Core/Src/can.c:133:9:CAN_sendFrame	32	static
-../Core/Src/can.c:159:6:CAN1_RX0_IRQHandler	32	static
-../Core/Src/can.c:186:6:CAN_frameToString	64	dynamic
-../Core/Src/can.c:197:6:EXTI0_IRQHandler	8	static
-../Core/Src/can.c:206:6:EXTI0_buttonpressCallback	8	static
-../Core/Src/can.c:213:6:CAN_receiveCallback	120	static
+../Core/Src/can.c:159:6:CAN1_RX0_IRQHandler	8	static
+../Core/Src/can.c:170:6:CAN_frameToString	64	dynamic
+../Core/Src/can.c:181:6:EXTI0_IRQHandler	8	static
+../Core/Src/can.c:190:6:EXTI0_buttonpressCallback	8	static
+../Core/Src/can.c:197:6:CAN_receiveCallback	112	static

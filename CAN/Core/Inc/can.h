@@ -37,6 +37,6 @@ void CAN_frameToString(CAN_frame* frame, char* str);
 
 void EXTI0_buttonpressCallback();
 
-void CAN_receiveCallback(CAN_frame CAN_mess);
+void CAN_receiveCallback();
 
 #endif /* INC_CAN_H_ */

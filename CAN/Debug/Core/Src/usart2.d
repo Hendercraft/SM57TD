@@ -24,7 +24,9 @@ Core/Src/usart2.o: ../Core/Src/usart2.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
- ../Core/Inc/usart2.h
+ ../Core/Inc/usart2.h ../Core/Inc/can.h \
+ ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h \
+ ../Core/Inc/usart2.h ../Core/Inc/circularbuffer.h
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
@@ -51,3 +53,7 @@ Core/Src/usart2.o: ../Core/Src/usart2.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Core/Inc/usart2.h:
+../Core/Inc/can.h:
+../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h:
+../Core/Inc/usart2.h:
+../Core/Inc/circularbuffer.h:

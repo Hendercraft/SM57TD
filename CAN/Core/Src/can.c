@@ -22,7 +22,6 @@ void CAN_Counter_Init(){
 
 void CAN_GPIO_Init(){
 
-	ReciveBuffer = getNewBuffer();
 	Configure_buttonInterrupt();
 	RCC->AHB1ENR |= 0x2; //gpio clock activation for can gpio B
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN; //for the led gpio D
@@ -43,6 +42,7 @@ void CAN_GPIO_Init(){
 }
 
 void CAN_config(uint8_t IDE, uint8_t FBM, uint16_t Filter_ID_high, uint16_t Filter_ID_low, uint16_t Filter_Mask_high, uint16_t Filter_Mask_low){
+	ReciveBuffer = getNewBuffer();
 	//clear sleep bit
 	CAN1->MCR &= ~(0x2);
 	//wait for the can to wakeup
@@ -158,26 +158,10 @@ uint8_t CAN_sendFrame(CAN_frame CAN_mess){
 // Interrupt handler for CAN1 RX0
 void CAN1_RX0_IRQHandler(void)
 {
-    CAN_frame CAN_mess;
-
     if (CAN1->RF0R & CAN_RF0R_FMP0) // check if there is a message in the FIFO
     {
-        // read the message from the FIFO
-        CAN_mess.IDE = (CAN1->sFIFOMailBox[0].RIR & CAN_RI0R_IDE) ? 1 : 0; // check if extended identifier
-        if (CAN_mess.IDE == 0) { // standard identifier
-            CAN_mess.ID = (CAN1->sFIFOMailBox[0].RIR >> 21) & 0x7FF; //Fetch the 11bits ID
-        }
-        else { // extended identifier
-            CAN_mess.ID = (CAN1->sFIFOMailBox[0].RIR >> 3) & 0x1FFFFFFF; //Fetch the 29 bit ID
-        }
-        CAN_mess.RTR = (CAN1->sFIFOMailBox[0].RIR & CAN_RI0R_RTR) ? 1 : 0; //Is it a reception trame?
-        CAN_mess.DLC = CAN1->sFIFOMailBox[0].RDTR & 0x0F;
-
-        for (int i = 0; i < CAN_mess.DLC; i++){
-        	CAN_mess.data[i] = (CAN1->sFIFOMailBox[0].RDLR >> (i*8)) & 0xFF;
-        }
         // call the receive callback function
-        CAN_receiveCallback(CAN_mess);
+        CAN_receiveCallback();
         // clear the message from the FIFO
         CAN1->RF0R |= CAN_RF0R_RFOM0;
     }
@@ -210,8 +194,21 @@ void EXTI0_buttonpressCallback(){
 
 
 // Receive callback function to be implemented by user
-void CAN_receiveCallback(CAN_frame CAN_mess)
+void CAN_receiveCallback(void)
 {
+	CAN_frame CAN_mess;
+	// read the message from the FIFO
+	CAN_mess.IDE = (CAN1->sFIFOMailBox[0].RIR & CAN_RI0R_IDE) ? 1 : 0; // check if extended identifier
+	if (CAN_mess.IDE == 0) { // standard identifier
+		CAN_mess.ID = (CAN1->sFIFOMailBox[0].RIR >> 21) & 0x7FF; //Fetch the 11bits ID
+	}else { // extended identifier
+		CAN_mess.ID = (CAN1->sFIFOMailBox[0].RIR >> 3) & 0x1FFFFFFF; //Fetch the 29 bit ID
+	}
+	CAN_mess.RTR = (CAN1->sFIFOMailBox[0].RIR & CAN_RI0R_RTR) ? 1 : 0; //Is it a reception trame?
+	CAN_mess.DLC = CAN1->sFIFOMailBox[0].RDTR & 0x0F;
+	for (int i = 0; i < CAN_mess.DLC; i++){
+		CAN_mess.data[i] = (CAN1->sFIFOMailBox[0].RDLR >> (i*8)) & 0xFF;
+	}
 	int overwrite = pushToBuffer(ReciveBuffer,(void**)&CAN_mess);
 	if (overwrite == 1){
 		serial_puts("Buffer is full, overwriting oldest message\r\n");

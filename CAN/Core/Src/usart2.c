@@ -7,7 +7,13 @@
 
 #include "stm32f4xx_hal.h"
 #include "usart2.h"
+#include <string.h>
+#include <stdli.h>
+#include "can.h"
 
+
+char rxBuffer[12];
+int rxIndex = 0;
 
 // USART2 Initialization
 void init_usart(void){
@@ -171,7 +177,7 @@ char * int2string(signed int num, char * s)
          num=temp;
      }
      if(sign==1) {
-         s[cnt]=0x2D;      							// caractère '-'
+         s[cnt]=0x2D;      							// caractï¿½re '-'
          cnt++;
      }
      for(i = 0;i<(int)(cnt/2);i++) {
@@ -180,7 +186,7 @@ char * int2string(signed int num, char * s)
          s[i]=s[cnt-i-1];        					// inverse le nombre
          s[cnt-i-1]=c;
      }
-     s[cnt]='\0';     								// met un terme à la chaîne de caractères
+     s[cnt]='\0';     								// met un terme ï¿½ la chaï¿½ne de caractï¿½res
      return s;
 }
 
@@ -208,7 +214,7 @@ char * float2string(float nombre,char *chaine)
 		nbf*=10;
 		nb=(int)nbf;
 
-		if(inc == -2) end=1; // convertie jusqu'à 2 chiffres après la virgule
+		if(inc == -2) end=1; // convertie jusqu'ï¿½ 2 chiffres aprï¿½s la virgule
 
 		nb%=10;
 
@@ -225,3 +231,34 @@ char * float2string(float nombre,char *chaine)
 	chaine[i]='\0';
 	return(chaine);
 }
+
+void USART2_IRQHandler(void) {
+  // Check if the RXNE (Receive Data Register Not Empty) flag is set
+  if (USART2->SR & USART_SR_RXNE) {
+    // Read the received data
+    char data = USART2->DR;
+
+    // Store the received character in the buffer
+    rxBuffer[rxIndex] = data;
+
+    // Check for the word "trame"
+    if (strcmp(rxBuffer,"trame") == 0){
+    	handleTrameReceived();
+    }
+
+    // Increment the buffer index
+    rxIndex += 1 % 12;
+  }
+}
+void handleTrameReceived(){
+	CAN_frame trame;
+	trame.ID = 0x010;
+	trame.IDE = 0x0;
+	trame.RTR = 0;
+	trame.DLC = 1;
+	trame.data[0] = 0;
+	CAN_sendFrame(trame);
+}
+
+
+
