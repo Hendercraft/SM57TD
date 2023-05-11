@@ -89,7 +89,7 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-
+  init_usart();
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
@@ -97,12 +97,13 @@ int main(void)
   /* Initialize all configured peripherals */
   /* USER CODE BEGIN 2 */
   CAN_GPIO_Init();
+  CAN_Counter_Init();
   UART_Init();
 
   //2.3
   //32bit mode, list mode
   //ID = 0x010,standard ID, accept both data and request frame
-  //CAN_config(1,1,(0x10 << 5),0x2,(0x10 << 5),0x00);
+  CAN_config(1,1,(0x10 << 5),0x2,(0x10 << 5),0x00);
 
   //2.4
   //32bit mode, list mode
@@ -116,11 +117,8 @@ int main(void)
   __enable_irq();
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int status = 0;
-  status = CAN_sendFrame(frame);
   while (1){
     /* USER CODE END WHILE */
-	  UART_PutChar('5');
     /* USER CODE BEGIN 3 *     */
 
   }

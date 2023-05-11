@@ -6,12 +6,22 @@
  */
 
 #include "can.h"
+#include "circularbuffer.h" //Avoiding circular dependency
 
 static GPIO_TypeDef * PB = GPIOB;
 
 
+void CAN_Counter_Init(){
+	Counter.ID = 0x010;
+	Counter.IDE = 0x0;
+	Counter.RTR = 0;
+	Counter.DLC = 1;
+	Counter.data[0] = 0;
+}
+
 void CAN_GPIO_Init(){
 
+	Configure_buttonInterrupt();
 	RCC->AHB1ENR |= 0x2; //gpio clock activation for can gpio B
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN; //for the led gpio D
 	RCC->APB1ENR |= (0x1<<25); // can clock activation
@@ -51,12 +61,12 @@ void CAN_config(uint8_t IDE, uint8_t FBM, uint16_t Filter_ID_high, uint16_t Filt
 	CAN1->RF0R |= CAN_RF0R_RFOM0;
 
 	//Enable interrupt on mailbox 0
-	CAN1->IER |= 0x3;
+	CAN1->IER |= 0x2;
 
 	NVIC_SetPriority(CAN1_RX0_IRQn,0);
-	NVIC_SetPriority(CAN1_TX_IRQn,0);
+	//NVIC_SetPriority(CAN1_TX_IRQn,0);
 	NVIC_EnableIRQ(CAN1_RX0_IRQn);
-	NVIC_EnableIRQ(CAN1_TX_IRQn);
+	//NVIC_EnableIRQ(CAN1_TX_IRQn);
 
 	//set to normal mod
 	CAN1->MCR &= ~(0x1);
@@ -92,6 +102,29 @@ void CAN_config(uint8_t IDE, uint8_t FBM, uint16_t Filter_ID_high, uint16_t Filt
 	//Activate Filter 0
 	CAN1->FMR &= ~(0x1);
 
+}
+
+void Configure_buttonInterrupt() {
+    // Enable the clock for GPIOA and SYSCFG
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+    RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
+
+    // Configure PA0 as input with pull-up
+    GPIOA->MODER &= ~(GPIO_MODER_MODE0);  // Clear mode bits
+    GPIOA->PUPDR &= ~(GPIO_PUPDR_PUPD0);  // Clear pull-up/pull-down bits
+    //GPIOA->PUPDR |= GPIO_PUPDR_PUPD0_0;  // Set pull-up mode
+
+    // Connect EXTI Line 0 to PA0
+    SYSCFG->EXTICR[0] &= ~SYSCFG_EXTICR1_EXTI0;
+    SYSCFG->EXTICR[0] |= SYSCFG_EXTICR1_EXTI0_PA;
+
+    // Configure EXTI Line 0 to interrupt on the rising edge
+    EXTI->IMR |= EXTI_IMR_MR0;  // Enable interrupt on EXTI Line 0
+    EXTI->FTSR |= EXTI_FTSR_TR0;  // Set falling edge trigger
+
+    // Enable and set the interrupt in the NVIC
+    NVIC_EnableIRQ(EXTI0_IRQn);
+    NVIC_SetPriority(EXTI0_IRQn, 0);
 }
 
 
@@ -148,23 +181,43 @@ void CAN1_RX0_IRQHandler(void)
     }
 }
 
-void CAN1_TX_IRQHandler(void){
+void CAN_frameToString(CAN_frame* frame, char* str) {
+    sprintf(str, "ID: %lu, IDE: %u, RTR: %u, DLC: %u, Data: ",
+            frame->ID, frame->IDE, frame->RTR, frame->DLC);
 
-    // Check if transmission mailbox 0 is empty
-    if ((CAN1->TSR & CAN_TSR_TME0) == CAN_TSR_TME0)
-    {
-        // Send the next message in the transmission queue
-        // ...
-
-        // Clear the interrupt flag
-        CAN1->TSR |= CAN_TSR_TXOK0;
+    char temp[frame->DLC];
+    for (int i = 0; i < frame->DLC; i++) {
+        sprintf(temp, "%02X ", frame->data[i]);
+        strcat(str, temp);
     }
 }
+
+void EXTI0_IRQHandler(void) {
+    if ((EXTI->PR & EXTI_PR_PR0) != 0) {
+        // Button is pressed
+    	EXTI0_buttonpressCallback();
+        EXTI->PR |= EXTI_PR_PR0; // Clear the interrupt flag for EXTI Line 0
+
+    }
+}
+
+void EXTI0_buttonpressCallback(){
+	CAN_sendFrame(Counter);
+	Counter.data[0]+= 1;
+}
+
 
 // Receive callback function to be implemented by user
 void CAN_receiveCallback(CAN_frame CAN_mess)
 {
-	GPIOD->BSRR |= GPIO_BSRR_BS12;
+	/*int overwrite = pushToBuffer(Buffer,CAN_mess);
+	if (overwrite == 1){
+		serial_puts("Buffer is full, overwriting oldest message\r\n");
+	}
+	char stringbuffer[80];
+	CAN_frameToString(&CAN_mess,stringbuffer);
+	serial_puts(stringbuffer);
+	newLine();*/
 }
 
 

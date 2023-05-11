@@ -1,0 +1,3 @@
+circularbuffer.c:12:16:getNewBuffer	1
+circularbuffer.c:20:5:pushToBuffer	3
+circularbuffer.c:38:5:pullFromBuffer	3

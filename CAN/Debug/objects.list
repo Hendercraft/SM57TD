@@ -1,5 +1,6 @@
 "./Core/Src/UART_LIN.o"
 "./Core/Src/can.o"
+"./Core/Src/circularbuffer.o"
 "./Core/Src/main.o"
 "./Core/Src/stm32f4xx_hal_msp.o"
 "./Core/Src/stm32f4xx_it.o"
