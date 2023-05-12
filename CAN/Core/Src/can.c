@@ -154,7 +154,6 @@ uint8_t CAN_sendFrame(CAN_frame CAN_mess){
 }
 
 
-
 // Interrupt handler for CAN1 RX0
 void CAN1_RX0_IRQHandler(void)
 {
@@ -217,6 +216,36 @@ void CAN_receiveCallback(void)
 	CAN_frameToString(&CAN_mess,stringbuffer);
 	serial_puts(stringbuffer);
 	newLine();
+
+	//5 checking frame with id 0x010
+	if (CAN_mess.ID == 0x010){
+		if (CAN_mess.RTR == 1){//5.2 Request with id 0x10
+			serial_puts("Received request frame with ID 0x010\r\n");
+			serial_puts("Sending led state trough can\r\n");
+			CAN_frame led_Frame;
+			led_Frame.ID = 0x010;
+			led_Frame.IDE = 0x0;
+			led_Frame.RTR = 0;
+			led_Frame.DLC = 1;
+			led_Frame.data[0] = readLEDState() ;
+			CAN_sendFrame(led_Frame);
+		}else{//5.4 Data with id 0x10
+			serial_puts("Received data frame with ID 0x010\r\n");
+			serial_puts(sprintf("Green:%d Orange:%d Red:%d Blue:%d\r\n",CAN_mess.data[0] & 0b0001,(CAN_mess.data[0] & 0b0010)>>1,(CAN_mess.data[0] & 0b0100)>>2,(CAN_mess.data[0] & 0b1000)>>3));
+
+		}
+
+	}
 }
 
+uint8_t readLEDState() {
+  // Read the current state of the LEDs
+  uint8_t ledState = 0;
+  ledState |= (GPIOD->ODR & GPIO_ODR_ODR_12) ? 1 : 0; // Read Green LED state
+  ledState |= (GPIOD->ODR & GPIO_ODR_ODR_13) ? (1 << 1) : 0; // Read Orange LED state
+  ledState |= (GPIOD->ODR & GPIO_ODR_ODR_14) ? (1 << 2) : 0; // Read Red LED state
+  ledState |= (GPIOD->ODR & GPIO_ODR_ODR_15) ? (1 << 3) : 0; // Read Blue LED state
+
+  return ledState;
+}
 

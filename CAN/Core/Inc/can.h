@@ -39,4 +39,6 @@ void EXTI0_buttonpressCallback();
 
 void CAN_receiveCallback();
 
+uint8_t readLEDState();
+
 #endif /* INC_CAN_H_ */
