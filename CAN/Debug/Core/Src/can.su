@@ -5,8 +5,9 @@
 ../Core/Src/can.c:44:6:CAN_config	24	static
 ../Core/Src/can.c:109:6:Configure_buttonInterrupt	8	static
 ../Core/Src/can.c:133:9:CAN_sendFrame	32	static
-../Core/Src/can.c:159:6:CAN1_RX0_IRQHandler	8	static
-../Core/Src/can.c:170:6:CAN_frameToString	64	dynamic
-../Core/Src/can.c:181:6:EXTI0_IRQHandler	8	static
-../Core/Src/can.c:190:6:EXTI0_buttonpressCallback	8	static
-../Core/Src/can.c:197:6:CAN_receiveCallback	112	static
+../Core/Src/can.c:158:6:CAN1_RX0_IRQHandler	8	static
+../Core/Src/can.c:169:6:CAN_frameToString	64	dynamic
+../Core/Src/can.c:180:6:EXTI0_IRQHandler	8	static
+../Core/Src/can.c:189:6:EXTI0_buttonpressCallback	8	static
+../Core/Src/can.c:196:6:CAN_receiveCallback	136	static
+../Core/Src/can.c:241:9:readLEDState	16	static

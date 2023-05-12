@@ -5,8 +5,9 @@ can.c:23:6:CAN_GPIO_Init	1
 can.c:44:6:CAN_config	6
 can.c:109:6:Configure_buttonInterrupt	1
 can.c:133:9:CAN_sendFrame	3
-can.c:159:6:CAN1_RX0_IRQHandler	2
-can.c:170:6:CAN_frameToString	2
-can.c:181:6:EXTI0_IRQHandler	2
-can.c:190:6:EXTI0_buttonpressCallback	1
-can.c:197:6:CAN_receiveCallback	4
+can.c:158:6:CAN1_RX0_IRQHandler	2
+can.c:169:6:CAN_frameToString	2
+can.c:180:6:EXTI0_IRQHandler	2
+can.c:189:6:EXTI0_buttonpressCallback	1
+can.c:196:6:CAN_receiveCallback	6
+can.c:241:9:readLEDState	4
