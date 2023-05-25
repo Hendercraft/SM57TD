@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;TP3/Core/Src/color&apos; to &apos;color.c&apos;" description="Rename resource &apos;color&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Src/color" name="color.c" stamp="1680863239168" updateReferences="true"/>
+</session>
