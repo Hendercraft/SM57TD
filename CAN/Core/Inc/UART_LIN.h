@@ -19,6 +19,7 @@ typedef struct
   uint8_t ID;
   uint8_t length;
   uint8_t data[10];
+  uint8_t checksum;
   }LINMSG;
 
 //Variables with Global Scope  
@@ -28,8 +29,11 @@ extern  LINMSG Rx_Msg;
 extern int new_request;
 
 //Functions :
+void USART3_IRQHandler(void);
 void UART_Init (void);
 void SendMessage(LINMSG *msg);
+void SendHeader(uint8_t ID);
+void SendResponse();
 void SendRequest(LINMSG *msg);
 int slave_response(void);
 void UART_PutChar(uint8_t data);
