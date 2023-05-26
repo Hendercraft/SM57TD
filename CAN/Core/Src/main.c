@@ -99,6 +99,7 @@ int main(void)
   CAN_GPIO_Init();
   CAN_Counter_Init();
   UART_Init();
+  //UART_Init_test();
 
   //2.3
   //32bit mode, list mode
@@ -119,6 +120,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1){
     /* USER CODE END WHILE */
+	  UART_PutChar('a');
+	  sync_break();
     /* USER CODE BEGIN 3 *     */
 
   }
