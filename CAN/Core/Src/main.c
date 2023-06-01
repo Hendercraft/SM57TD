@@ -120,8 +120,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1){
     /* USER CODE END WHILE */
-	  UART_PutChar('a');
-	  sync_break();
+
     /* USER CODE BEGIN 3 *     */
 
   }

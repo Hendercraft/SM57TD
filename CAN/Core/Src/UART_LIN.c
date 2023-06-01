@@ -7,6 +7,10 @@
 
 #include "UART_LIN.h"
 
+//Is used in slave mode
+int sync_counter = -1;
+
+
 //Functions
 
 //UART_Init() sets up the UART for a 8-bit data, No Parity, 1 Stop bit
@@ -35,7 +39,7 @@ void UART_Init(void)
     //USART3->CR1 |= USART_CR1_TXEIE;
 
     // Enable reception interrupts
-    USART3->CR1 |= USART_CR1_RXNEIE
+    USART3->CR1 |= USART_CR1_RXNEIE;
 
     // Enable USART3
     USART3->CR1 |= USART_CR1_UE;
@@ -43,10 +47,9 @@ void UART_Init(void)
     NVIC_EnableIRQ(USART3_IRQn);
 
     // Perform the delay
-    for (uint32_t i = 0; i < 5000000; i++) {
+    for (uint32_t i = 0; i < 500000; i++) {
     	__NOP(); // No Operation, consumes one cycle
     }
-
 }
 
 static void GPIO_Init(void){
@@ -75,34 +78,62 @@ static void GPIO_Init(void){
 
 
 /*--- Transmit LIN Message ---*/
-
-void SendMessage(LINMSG *msg){
-	SendHeader(msg->ID);
-	SendResponse(msg);
+void SendMessage(LINMSG* msg, int master){
+	if (master == 1){
+		SendHeader(msg->ID);
+		SendResponse(msg);
+	}
 }
 /*--- Transmit LIN Request ---*/
 
+
+/*
+ * Used in master mode, send the header and then process the response
+ *
+ * @arg msg : An empty LIN frame where the response will be stored
+ * */
 void SendRequest(LINMSG *msg){
-	SendHeader(msg->ID);
+	int checksum = 1;
+	do{
+		SendHeader(msg->ID);
+		NVIC_DisableIRQ(USART3_IRQn); //Disable the interrupt so we manually catch the response
+		checksum = ResponseToRequest(msg); //process it
+	}while(checksum == 1);
+	NVIC_EnableIRQ(USART3_IRQn); //Enable back the int
 }
 
-void static SendHeader(uint8_t ID){
+static void SendHeader(uint8_t ID){
 	sync_break();
 	UART_PutChar(ID);
 }
 
-void static SendResponse(LINMSG *msg){
+static void SendResponse(LINMSG* msg){
 	for (int i = 0; i<(msg->length -1);i++){
-		UART_PutChar(data[i]);
+		UART_PutChar(msg->data[i]);
 	}
 	UART_PutChar(msg->checksum);
+}
+
+/*
+ * The goal of this function is to 'manually' go trough the response of the slave after a request
+ *
+ * */
+int8_t ResponseToRequest(LINMSG *msg){
+	int length = 0;
+	while(USART3->SR & USART_SR_RXNE_Msk && !(USART3->SR & USART_SR_LBD_Msk)){ //Fetch all the data while there is no sync detected
+		msg->data[length++] = USART3->DR; //Put the data in the strut, then increment length
+	}
+	msg->checksum = msg->data[length--];//Last data is the checksum, put it in the coresponding field
+	msg->length = length;
+
+	if(checksum(length, msg->data)!=msg->checksum) return 1;
+	return 0;
 }
 
 
 /*--- Send sync field and break ---*/
 
 void sync_break(void){
-	// Send 10 break bits
 	USART3->CR1 |= USART_CR1_SBK;  // Set SBK bit to send break bits
 	while (USART3->SR & USART_CR1_SBK);
 	while(!(USART3->SR & 0x00000040));
@@ -112,9 +143,27 @@ void sync_break(void){
 	while(!(USART3->SR & 0x00000040));
 }
 
-void slave_response(LINMSG *msg){
-	//Get the DR
-	//Store it in the data field of the msg
+/*
+ * This function is called at each interrupt
+ * It's used when the card is in slave mode
+ * It's role is to generate a response to the request of the master
+ * */
+int slave_response(void){
+	//sync_counter is used to determine whether we recived the sync byte or not
+	serial_putc(USART3->DR);
+	serial_putc("\n");
+
+	if(sync_counter == -1){
+		if(USART3->DR == 0x55){ //Check it is the sync byte (value 0x55)
+			sync_counter = 0;
+	    }
+	}
+	if(sync_counter == 0){ //We received the sync byte
+		//TODO
+		serial_putc(USART3->DR);
+
+		//ADD the different behavior as a slave based on the address
+	}
 }
 
 /*--- Transmit char ---*/
@@ -143,16 +192,12 @@ uint8_t checksum(uint8_t length, uint8_t *data){
 
 void USART3_IRQHandler(void)
 {
-    if (USART3->SR & USART_SR_RXNE)
-    {
+
         // Receive data available
     	//CAll slave response if it's data
     	//Otherwise, check if it's a header or a break
+    	slave_response();
 
-
-        // Process the received data as needed
-        // ...
-    }
 }
 
 

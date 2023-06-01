@@ -9,6 +9,7 @@
 #define	UART__LIN_H
 
 #include "stm32f4xx.h"
+#include "usart2.h" //Used to display error message
 
 //Declaration to Link External Functions & Variables:
 
@@ -28,18 +29,22 @@ extern  LINMSG Tx_Msg;
 extern  LINMSG Rx_Msg;
 extern int new_request;
 
+#define SLAVE_ADDR_WRITE 0x10
+#define SLAVE_ADDR_READ 0x11
+
 //Functions :
 void USART3_IRQHandler(void);
 void UART_Init (void);
-void SendMessage(LINMSG *msg);
-void SendHeader(uint8_t ID);
-void SendResponse();
+void SendMessage(LINMSG* msg, int master);
+static void SendHeader(uint8_t ID);
+static void SendResponse();
 void SendRequest(LINMSG *msg);
 int slave_response(void);
 void UART_PutChar(uint8_t data);
 void sync_break(void);
 uint8_t checksum(uint8_t length, uint8_t *data);
 static void GPIO_Init(void);
+int8_t ResponseToRequest(LINMSG *msg);
 
 
 
