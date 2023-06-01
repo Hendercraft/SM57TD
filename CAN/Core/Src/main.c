@@ -90,6 +90,7 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
   init_usart_int();
+  RTC_Init();
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */

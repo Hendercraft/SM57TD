@@ -8,21 +8,21 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="RTC_FORMAT_BIN"/>
+			<item value="US"/>
+			<item value="USART_SR"/>
+			<item value="sync"/>
+			<item value="SLAVE_"/>
+			<item value="SLAVE_RCV"/>
+			<item value="SLAVE_RCV_ADDR1"/>
+			<item value="USART_"/>
+			<item value="USART_SR_TXE_MASK"/>
 			<item value="CAN_TX"/>
 			<item value="GPIO_Init"/>
 			<item value="CAN_IER_FMPIE0"/>
 			<item value="CAN1-&gt;RIR"/>
 			<item value="CAN"/>
 			<item value="* PB"/>
-			<item value="PB"/>
-			<item value="OSPEEDR"/>
-			<item value="PUPDR"/>
-			<item value="GPIO"/>
-			<item value="GPIO_MODER"/>
-			<item value="MODER"/>
-			<item value="RTC_WeekDay_Definitions"/>
-			<item value="HAL_StatusTypeDef"/>
-			<item value="RTC"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

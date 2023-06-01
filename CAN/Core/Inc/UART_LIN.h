@@ -10,6 +10,7 @@
 
 #include "stm32f4xx.h"
 #include "usart2.h" //Used to display error message
+#include "rtc.h"
 
 //Declaration to Link External Functions & Variables:
 
@@ -29,7 +30,7 @@ extern  LINMSG Tx_Msg;
 extern  LINMSG Rx_Msg;
 extern int new_request;
 
-#define SLAVE_ADDR_WRITE 0x10
+#define SLAVE_ADDR_WRITE 0x73
 #define SLAVE_ADDR_READ 0x11
 
 //Functions :
@@ -45,6 +46,8 @@ void sync_break(void);
 uint8_t checksum(uint8_t length, uint8_t *data);
 static void GPIO_Init(void);
 int8_t ResponseToRequest(LINMSG *msg);
+
+void Send_RTC();
 
 
 

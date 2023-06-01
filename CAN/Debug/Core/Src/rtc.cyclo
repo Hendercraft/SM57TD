@@ -1,0 +1,17 @@
+core_cm4.h:1676:26:__NVIC_GetPriorityGrouping	1
+core_cm4.h:1688:22:__NVIC_EnableIRQ	2
+core_cm4.h:1816:22:__NVIC_SetPriority	2
+core_cm4.h:1863:26:NVIC_EncodePriority	2
+rtc.c:37:6:RTC_Init	7
+rtc.c:112:6:RTC_Calendar_Init	1
+rtc.c:137:9:RTC_Calendar_Init_Prompt	1
+rtc.c:155:6:RTC_Print_Timestamp	2
+rtc.c:183:9:c_to_bcd	5
+rtc.c:210:9:bcd_to_int	1
+rtc.c:224:6:USART2_Init	2
+rtc.c:276:5:__io_putchar	2
+rtc.c:310:9:USART2_transmit_IRQ	3
+rtc.c:341:5:__io_getchar	2
+rtc.c:357:9:USART2_Receive_line	10
+rtc.c:416:6:USART2_WaitUser	5
+rtc.c:444:6:USART2_NewLine	1

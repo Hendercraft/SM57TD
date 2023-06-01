@@ -108,7 +108,7 @@ static void SendHeader(uint8_t ID){
 }
 
 static void SendResponse(LINMSG* msg){
-	for (int i = 0; i<(msg->length -1);i++){
+	for (int i = 0; i<(msg->length);i++){
 		UART_PutChar(msg->data[i]);
 	}
 	UART_PutChar(msg->checksum);
@@ -135,12 +135,10 @@ int8_t ResponseToRequest(LINMSG *msg){
 
 void sync_break(void){
 	USART3->CR1 |= USART_CR1_SBK;  // Set SBK bit to send break bits
-	while (USART3->SR & USART_CR1_SBK);
-	while(!(USART3->SR & 0x00000040));
+	while (USART3->CR1 & USART_CR1_SBK); //Wait for the break to be over
+	while(!(USART3->SR & USART_SR_TC_Msk)); //wait for the transmission to be complete
 
-	USART3->DR = 0x55;  // Send sync field with value 0x55
-	while(!(USART3->SR & 0x00000080));
-	while(!(USART3->SR & 0x00000040));
+	UART_PutChar(0x55);
 }
 
 /*
@@ -151,17 +149,21 @@ void sync_break(void){
 int slave_response(void){
 	//sync_counter is used to determine whether we recived the sync byte or not
 	serial_putc(USART3->DR);
-	serial_putc("\n");
 
 	if(sync_counter == -1){
 		if(USART3->DR == 0x55){ //Check it is the sync byte (value 0x55)
 			sync_counter = 0;
+			return 1;
+	    }else{
+			return -1;
 	    }
 	}
 	if(sync_counter == 0){ //We received the sync byte
 		//TODO
-		serial_putc(USART3->DR);
-
+		if (USART3->DR == SLAVE_ADDR_WRITE){ //If we recied a request for the RTC
+			Send_RTC();
+			return 0;
+		}
 		//ADD the different behavior as a slave based on the address
 	}
 }
@@ -190,13 +192,38 @@ uint8_t checksum(uint8_t length, uint8_t *data){
 	return (uint8_t)(0xff - check_sum);
 }
 
+void Send_RTC(){
+
+	// Read date and time registers
+	uint32_t time_tmp_reg = RTC->TR;
+	uint32_t date_tmp_reg = RTC->DR;
+
+		// Extract values from saved register values
+	uint8_t day = bcd_to_int((date_tmp_reg & (RTC_DR_DU | RTC_DR_DT)) >> RTC_DR_DU_Pos);
+	uint8_t month = bcd_to_int((date_tmp_reg & (RTC_DR_MU | RTC_DR_MT)) >> RTC_DR_MU_Pos);
+	uint8_t year = bcd_to_int((date_tmp_reg & (RTC_DR_YU | RTC_DR_YT)) >> RTC_DR_YU_Pos);
+	uint8_t hour = bcd_to_int((time_tmp_reg & (RTC_TR_HU | RTC_TR_HT)) >> RTC_TR_HU_Pos);
+	uint8_t min = bcd_to_int((time_tmp_reg & (RTC_TR_MNU | RTC_TR_MNT)) >> RTC_TR_MNU_Pos);
+	uint8_t sec = bcd_to_int((time_tmp_reg & (RTC_TR_SU | RTC_TR_ST)) >> RTC_TR_SU_Pos);
+
+	LINMSG response;
+	response.length = 6;
+	response.data[0] = hour;
+	response.data[1] = min;
+	response.data[2] = sec;
+	response.data[3] = day;
+	response.data[4] = month;
+	response.data[5] = year;
+	response.checksum = checksum(6,response.data);
+	SendResponse(&response);
+}
+
+
 void USART3_IRQHandler(void)
 {
-
-        // Receive data available
-    	//CAll slave response if it's data
-    	//Otherwise, check if it's a header or a break
-    	slave_response();
+		if(USART3->SR & USART_SR_RXNE || USART3->SR & USART_SR_LBD_Msk){
+			slave_response();
+		}
 
 }
 

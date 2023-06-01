@@ -26,7 +26,8 @@ Core/Src/stm32f4xx_hal_msp.o: ../Core/Src/stm32f4xx_hal_msp.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Core/Inc/can.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h \
- ../Core/Inc/usart2.h ../Core/Inc/circularbuffer.h ../Core/Inc/UART_LIN.h
+ ../Core/Inc/usart2.h ../Core/Inc/circularbuffer.h ../Core/Inc/UART_LIN.h \
+ ../Core/Inc/rtc.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -58,3 +59,4 @@ Core/Src/stm32f4xx_hal_msp.o: ../Core/Src/stm32f4xx_hal_msp.c \
 ../Core/Inc/usart2.h:
 ../Core/Inc/circularbuffer.h:
 ../Core/Inc/UART_LIN.h:
+../Core/Inc/rtc.h:

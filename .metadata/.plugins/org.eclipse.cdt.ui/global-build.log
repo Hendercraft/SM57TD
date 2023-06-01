@@ -1,97 +1,10 @@
-11:54:48 **** Incremental Build of configuration Debug for project CAN ****
+01:19:07 **** Incremental Build of configuration Debug for project CAN ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11140	    124	   1628	  12892	   325c	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-11:54:53 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-size   CAN.elf 
-   text	   data	    bss	    dec	    hex	filename
-  11140	    124	   1628	  12892	   325c	CAN.elf
-Finished building: default.size.stdout
- 
-11:56:17 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-size   CAN.elf 
-   text	   data	    bss	    dec	    hex	filename
-  11140	    124	   1628	  12892	   325c	CAN.elf
-Finished building: default.size.stdout
- 
-11:57:07 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-size   CAN.elf 
-   text	   data	    bss	    dec	    hex	filename
-  11140	    124	   1628	  12892	   325c	CAN.elf
-Finished building: default.size.stdout
- 
-12:50:27 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11124	    124	   1628	  12876	   324c	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-12:52:34 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-size   CAN.elf 
-   text	   data	    bss	    dec	    hex	filename
-  11124	    124	   1628	  12876	   324c	CAN.elf
-Finished building: default.size.stdout
- 
-12:53:26 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-size   CAN.elf 
-   text	   data	    bss	    dec	    hex	filename
-  11124	    124	   1628	  12876	   324c	CAN.elf
-Finished building: default.size.stdout
- 
-12:57:29 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11124	    124	   1628	  12876	   324c	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-13:43:57 **** Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-size   CAN.elf 
-   text	   data	    bss	    dec	    hex	filename
-  11124	    124	   1628	  12876	   324c	CAN.elf
-Finished building: default.size.stdout
- 
-13:44:10 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-size   CAN.elf 
-   text	   data	    bss	    dec	    hex	filename
-  11124	    124	   1628	  12876	   324c	CAN.elf
-Finished building: default.size.stdout
- 
-13:45:15 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/rtc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/rtc.d" -MT"Core/Src/rtc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/rtc.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
 ../Core/Src/main.c: In function 'main':
 ../Core/Src/main.c:67:12: warning: variable 'frame' set but not used [-Wunused-but-set-variable]
    67 |  CAN_frame frame;
@@ -99,215 +12,43 @@ arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -D
 In file included from ../Core/Inc/main.h:35,
                  from ../Core/Src/main.c:20:
 ../Core/Src/main.c: At top level:
-../Core/Inc/UART_LIN.h:38:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
-   38 | static void GPIO_Init(void);
+../Core/Inc/UART_LIN.h:40:13: warning: 'SendHeader' declared 'static' but never defined [-Wunused-function]
+   40 | static void SendHeader(uint8_t ID);
+      |             ^~~~~~~~~~
+../Core/Inc/UART_LIN.h:41:13: warning: 'SendResponse' declared 'static' but never defined [-Wunused-function]
+   41 | static void SendResponse();
+      |             ^~~~~~~~~~~~
+../Core/Inc/UART_LIN.h:47:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   47 | static void GPIO_Init(void);
       |             ^~~~~~~~~
 ../Core/Src/main.c:50:13: warning: 'MX_GPIO_Init' declared 'static' but never defined [-Wunused-function]
    50 | static void MX_GPIO_Init(void);
       |             ^~~~~~~~~~~~
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11124	    124	   1628	  12876	   324c	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-13:52:35 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-size   CAN.elf 
-   text	   data	    bss	    dec	    hex	filename
-  11124	    124	   1628	  12876	   324c	CAN.elf
-Finished building: default.size.stdout
- 
-13:52:40 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-size   CAN.elf 
-   text	   data	    bss	    dec	    hex	filename
-  11124	    124	   1628	  12876	   324c	CAN.elf
-Finished building: default.size.stdout
- 
-13:52:50 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-size   CAN.elf 
-   text	   data	    bss	    dec	    hex	filename
-  11124	    124	   1628	  12876	   324c	CAN.elf
-Finished building: default.size.stdout
- 
-13:53:09 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-size   CAN.elf 
-   text	   data	    bss	    dec	    hex	filename
-  11124	    124	   1628	  12876	   324c	CAN.elf
-Finished building: default.size.stdout
- 
-14:15:17 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11156	    124	   1628	  12908	   326c	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-14:16:08 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11160	    124	   1628	  12912	   3270	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-14:16:20 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11160	    124	   1628	  12912	   3270	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-14:17:25 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11160	    124	   1628	  12912	   3270	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-14:19:58 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:102:3: error: 'UART_Init_test' undeclared (first use in this function); did you mean 'UART_Init'?
-  102 |   UART_Init_test;
-      |   ^~~~~~~~~~~~~~
-      |   UART_Init
-../Core/Src/main.c:102:3: note: each undeclared identifier is reported only once for each function it appears in
-../Core/Src/main.c:67:12: warning: variable 'frame' set but not used [-Wunused-but-set-variable]
-   67 |  CAN_frame frame;
-      |            ^~~~~
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:169:1: warning: control reaches end of non-void function [-Wreturn-type]
+  169 | }
+      | ^
 In file included from ../Core/Inc/main.h:35,
-                 from ../Core/Src/main.c:20:
-../Core/Src/main.c: At top level:
-../Core/Inc/UART_LIN.h:38:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
-   38 | static void GPIO_Init(void);
-      |             ^~~~~~~~~
-../Core/Src/main.c:50:13: warning: 'MX_GPIO_Init' declared 'static' but never defined [-Wunused-function]
-   50 | static void MX_GPIO_Init(void);
+                 from ../Core/Src/stm32f4xx_hal_msp.c:22:
+../Core/Inc/UART_LIN.h:40:13: warning: 'SendHeader' declared 'static' but never defined [-Wunused-function]
+   40 | static void SendHeader(uint8_t ID);
+      |             ^~~~~~~~~~
+../Core/Inc/UART_LIN.h:41:13: warning: 'SendResponse' declared 'static' but never defined [-Wunused-function]
+   41 | static void SendResponse();
       |             ^~~~~~~~~~~~
-make: *** [Core/Src/subdir.mk:46: Core/Src/main.o] Error 1
-"make -j8 all" terminated with exit code 2. Build might be incomplete.
-14:20:07 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:102:3: warning: implicit declaration of function 'UART_Init_test'; did you mean 'UART_Init'? [-Wimplicit-function-declaration]
-  102 |   UART_Init_test();
-      |   ^~~~~~~~~~~~~~
-      |   UART_Init
-../Core/Src/main.c:67:12: warning: variable 'frame' set but not used [-Wunused-but-set-variable]
-   67 |  CAN_frame frame;
-      |            ^~~~~
+../Core/Inc/UART_LIN.h:47:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   47 | static void GPIO_Init(void);
+      |             ^~~~~~~~~
 In file included from ../Core/Inc/main.h:35,
-                 from ../Core/Src/main.c:20:
-../Core/Src/main.c: At top level:
-../Core/Inc/UART_LIN.h:38:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
-   38 | static void GPIO_Init(void);
-      |             ^~~~~~~~~
-../Core/Src/main.c:50:13: warning: 'MX_GPIO_Init' declared 'static' but never defined [-Wunused-function]
-   50 | static void MX_GPIO_Init(void);
+                 from ../Core/Src/stm32f4xx_it.c:21:
+../Core/Inc/UART_LIN.h:40:13: warning: 'SendHeader' declared 'static' but never defined [-Wunused-function]
+   40 | static void SendHeader(uint8_t ID);
+      |             ^~~~~~~~~~
+../Core/Inc/UART_LIN.h:41:13: warning: 'SendResponse' declared 'static' but never defined [-Wunused-function]
+   41 | static void SendResponse();
       |             ^~~~~~~~~~~~
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11320	    124	   1628	  13072	   3310	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-14:20:36 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-size   CAN.elf 
-   text	   data	    bss	    dec	    hex	filename
-  11320	    124	   1628	  13072	   3310	CAN.elf
-Finished building: default.size.stdout
- 
-14:35:31 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11320	    124	   1628	  13072	   3310	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-14:36:44 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:67:12: warning: variable 'frame' set but not used [-Wunused-but-set-variable]
-   67 |  CAN_frame frame;
-      |            ^~~~~
-In file included from ../Core/Inc/main.h:35,
-                 from ../Core/Src/main.c:20:
-../Core/Src/main.c: At top level:
-../Core/Inc/UART_LIN.h:38:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
-   38 | static void GPIO_Init(void);
-      |             ^~~~~~~~~
-../Core/Src/main.c:50:13: warning: 'MX_GPIO_Init' declared 'static' but never defined [-Wunused-function]
-   50 | static void MX_GPIO_Init(void);
-      |             ^~~~~~~~~~~~
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11160	    124	   1628	  12912	   3270	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-14:38:12 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-../Core/Src/UART_LIN.c:108:13: warning: 'GPIO_Init' defined but not used [-Wunused-function]
-  108 | static void GPIO_Init(void)
+../Core/Inc/UART_LIN.h:47:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   47 | static void GPIO_Init(void);
       |             ^~~~~~~~~
 arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: CAN.elf
@@ -315,136 +56,36 @@ Finished building target: CAN.elf
 arm-none-eabi-size   CAN.elf 
 arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
    text	   data	    bss	    dec	    hex	filename
-  11056	    124	   1628	  12808	   3208	CAN.elf
+  13452	    128	   1624	  15204	   3b64	CAN.elf
 Finished building: default.size.stdout
  
 Finished building: CAN.list
  
-14:48:14 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-../Core/Src/UART_LIN.c:108:13: warning: 'GPIO_Init' defined but not used [-Wunused-function]
-  108 | static void GPIO_Init(void)
-      |             ^~~~~~~~~
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11044	    124	   1628	  12796	   31fc	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-14:48:42 **** Incremental Build of configuration Debug for project CAN ****
+01:19:18 **** Incremental Build of configuration Debug for project CAN ****
 make -j8 all 
 arm-none-eabi-size   CAN.elf 
    text	   data	    bss	    dec	    hex	filename
-  11044	    124	   1628	  12796	   31fc	CAN.elf
+  13452	    128	   1624	  15204	   3b64	CAN.elf
 Finished building: default.size.stdout
  
-14:56:19 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-../Core/Src/UART_LIN.c:109:13: warning: 'GPIO_Init' defined but not used [-Wunused-function]
-  109 | static void GPIO_Init(void)
-      |             ^~~~~~~~~
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11064	    124	   1628	  12816	   3210	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-15:19:04 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-../Core/Src/UART_LIN.c:110:13: warning: 'GPIO_Init' defined but not used [-Wunused-function]
-  110 | static void GPIO_Init(void)
-      |             ^~~~~~~~~
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11076	    124	   1628	  12828	   321c	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-15:20:14 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11180	    124	   1628	  12932	   3284	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-15:43:55 **** Incremental Build of configuration Debug for project CAN ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:67:12: warning: variable 'frame' set but not used [-Wunused-but-set-variable]
-   67 |  CAN_frame frame;
-      |            ^~~~~
-In file included from ../Core/Inc/main.h:35,
-                 from ../Core/Src/main.c:20:
-../Core/Src/main.c: At top level:
-../Core/Inc/UART_LIN.h:38:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
-   38 | static void GPIO_Init(void);
-      |             ^~~~~~~~~
-../Core/Src/main.c:50:13: warning: 'MX_GPIO_Init' declared 'static' but never defined [-Wunused-function]
-   50 | static void MX_GPIO_Init(void);
-      |             ^~~~~~~~~~~~
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
-arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
-   text	   data	    bss	    dec	    hex	filename
-  11280	    124	   1628	  13032	   32e8	CAN.elf
-Finished building: default.size.stdout
- 
-Finished building: CAN.list
- 
-15:44:14 **** Incremental Build of configuration Debug for project CAN ****
+01:19:52 **** Incremental Build of configuration Debug for project CAN ****
 make -j8 all 
 arm-none-eabi-size   CAN.elf 
    text	   data	    bss	    dec	    hex	filename
-  11280	    124	   1628	  13032	   32e8	CAN.elf
+  13452	    128	   1624	  15204	   3b64	CAN.elf
 Finished building: default.size.stdout
  
-15:44:32 **** Incremental Build of configuration Debug for project CAN ****
+01:20:57 **** Incremental Build of configuration Debug for project CAN ****
 make -j8 all 
 arm-none-eabi-size   CAN.elf 
    text	   data	    bss	    dec	    hex	filename
-  11280	    124	   1628	  13032	   32e8	CAN.elf
+  13452	    128	   1624	  15204	   3b64	CAN.elf
 Finished building: default.size.stdout
  
-15:47:36 **** Incremental Build of configuration Debug for project CAN ****
+01:24:45 **** Incremental Build of configuration Debug for project CAN ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
-arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN.elf
- 
 arm-none-eabi-size   CAN.elf 
-arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
    text	   data	    bss	    dec	    hex	filename
-  11280	    124	   1628	  13032	   32e8	CAN.elf
+  13452	    128	   1624	  15204	   3b64	CAN.elf
 Finished building: default.size.stdout
- 
-Finished building: CAN.list
  

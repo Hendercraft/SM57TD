@@ -33,6 +33,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "can.h"
 #include "UART_LIN.h"
+#include "rtc.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

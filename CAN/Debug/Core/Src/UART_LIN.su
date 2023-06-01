@@ -7,8 +7,9 @@
 ../Core/Src/UART_LIN.c:105:13:SendHeader	16	static
 ../Core/Src/UART_LIN.c:110:13:SendResponse	24	static
 ../Core/Src/UART_LIN.c:121:8:ResponseToRequest	24	static
-../Core/Src/UART_LIN.c:136:6:sync_break	4	static
-../Core/Src/UART_LIN.c:151:5:slave_response	8	static
-../Core/Src/UART_LIN.c:171:6:UART_PutChar	16	static
-../Core/Src/UART_LIN.c:180:9:checksum	24	static
-../Core/Src/UART_LIN.c:193:6:USART3_IRQHandler	8	static
+../Core/Src/UART_LIN.c:136:6:sync_break	8	static
+../Core/Src/UART_LIN.c:149:5:slave_response	8	static
+../Core/Src/UART_LIN.c:173:6:UART_PutChar	16	static
+../Core/Src/UART_LIN.c:182:9:checksum	24	static
+../Core/Src/UART_LIN.c:195:6:Send_RTC	40	static
+../Core/Src/UART_LIN.c:222:6:USART3_IRQHandler	8	static
