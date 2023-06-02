@@ -67,14 +67,14 @@ int main(void)
 	CAN_frame frame;
 
 	// Initialiser les champs de la structure
-	frame.ID = 0x524010;
+	frame.ID = 0x10510110;
 	frame.IDE = 0x1;
-	frame.RTR = 0;
-	frame.DLC = 4;
-	frame.data[0] = 0xAA;
-	frame.data[1] = 0xBB;
-	frame.data[2] = 0xCC;
-	frame.data[3] = 0xDD;
+	frame.RTR = 1;
+	frame.DLC = 0;
+	//frame.data[0] = 0xAA;
+	//frame.data[1] = 0xBB;
+	//frame.data[2] = 0xCC;
+	//frame.data[3] = 0xDD;
 
   /* USER CODE END 1 */
 

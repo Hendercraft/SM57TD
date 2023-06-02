@@ -89,3 +89,355 @@ arm-none-eabi-size   CAN.elf
   13452	    128	   1624	  15204	   3b64	CAN.elf
 Finished building: default.size.stdout
  
+10:11:27 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+In file included from ../Core/Inc/main.h:35,
+                 from ../Core/Src/stm32f4xx_hal_msp.c:22:
+../Core/Inc/UART_LIN.h:41:13: warning: 'SendHeader' declared 'static' but never defined [-Wunused-function]
+   41 | static void SendHeader(uint8_t ID);
+      |             ^~~~~~~~~~
+../Core/Inc/UART_LIN.h:42:13: warning: 'SendResponse' declared 'static' but never defined [-Wunused-function]
+   42 | static void SendResponse();
+      |             ^~~~~~~~~~~~
+../Core/Inc/UART_LIN.h:48:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   48 | static void GPIO_Init(void);
+      |             ^~~~~~~~~
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:163:5: warning: implicit declaration of function 'Send_LIN_To_CAN' [-Wimplicit-function-declaration]
+  163 |     Send_LIN_To_CAN(salve_rx_msg);
+      |     ^~~~~~~~~~~~~~~
+../Core/Src/UART_LIN.c: At top level:
+../Core/Src/UART_LIN.c:241:6: warning: conflicting types for 'Send_LIN_To_CAN'
+  241 | void Send_LIN_To_CAN(LINMSG* salve_rx_msg){
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/UART_LIN.c:163:5: note: previous implicit declaration of 'Send_LIN_To_CAN' was here
+  163 |     Send_LIN_To_CAN(salve_rx_msg);
+      |     ^~~~~~~~~~~~~~~
+../Core/Src/UART_LIN.c: In function 'Send_LIN_To_CAN':
+../Core/Src/UART_LIN.c:247:30: error: 'salve_rx_msg' is a pointer; did you mean to use '->'?
+  247 |  for (int i=0; i<salve_rx_msg.length;i++){
+      |                              ^
+      |                              ->
+../Core/Src/UART_LIN.c:248:15: error: subscripted value is neither array nor pointer nor vector
+  248 |   can_linframe[i] = salve_rx_msg[i];
+      |               ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:67:12: warning: variable 'frame' set but not used [-Wunused-but-set-variable]
+   67 |  CAN_frame frame;
+      |            ^~~~~
+In file included from ../Core/Inc/main.h:35,
+                 from ../Core/Src/main.c:20:
+../Core/Src/main.c: At top level:
+../Core/Inc/UART_LIN.h:41:13: warning: 'SendHeader' declared 'static' but never defined [-Wunused-function]
+   41 | static void SendHeader(uint8_t ID);
+      |             ^~~~~~~~~~
+../Core/Inc/UART_LIN.h:42:13: warning: 'SendResponse' declared 'static' but never defined [-Wunused-function]
+   42 | static void SendResponse();
+      |             ^~~~~~~~~~~~
+../Core/Inc/UART_LIN.h:48:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   48 | static void GPIO_Init(void);
+      |             ^~~~~~~~~
+../Core/Src/main.c:50:13: warning: 'MX_GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   50 | static void MX_GPIO_Init(void);
+      |             ^~~~~~~~~~~~
+../Core/Src/UART_LIN.c:250:16: error: 'can_request' undeclared (first use in this function); did you mean 'new_request'?
+  250 |  CAN_sendFrame(can_request);
+      |                ^~~~~~~~~~~
+      |                new_request
+../Core/Src/UART_LIN.c:250:16: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/UART_LIN.c:242:12: warning: variable 'can_linframe' set but not used [-Wunused-but-set-variable]
+  242 |  CAN_frame can_linframe = {0};
+      |            ^~~~~~~~~~~~
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:189:1: warning: control reaches end of non-void function [-Wreturn-type]
+  189 | }
+      | ^
+In file included from ../Core/Inc/main.h:35,
+                 from ../Core/Src/stm32f4xx_it.c:21:
+../Core/Inc/UART_LIN.h:41:13: warning: 'SendHeader' declared 'static' but never defined [-Wunused-function]
+   41 | static void SendHeader(uint8_t ID);
+      |             ^~~~~~~~~~
+../Core/Inc/UART_LIN.h:42:13: warning: 'SendResponse' declared 'static' but never defined [-Wunused-function]
+   42 | static void SendResponse();
+      |             ^~~~~~~~~~~~
+../Core/Inc/UART_LIN.h:48:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   48 | static void GPIO_Init(void);
+      |             ^~~~~~~~~
+make: *** [Core/Src/subdir.mk:49: Core/Src/UART_LIN.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:12:27 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:163:5: warning: implicit declaration of function 'Send_LIN_To_CAN' [-Wimplicit-function-declaration]
+  163 |     Send_LIN_To_CAN(&salve_rx_msg);
+      |     ^~~~~~~~~~~~~~~
+../Core/Src/UART_LIN.c: At top level:
+../Core/Src/UART_LIN.c:241:6: warning: conflicting types for 'Send_LIN_To_CAN'
+  241 | void Send_LIN_To_CAN(LINMSG* salve_rx_msg){
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/UART_LIN.c:163:5: note: previous implicit declaration of 'Send_LIN_To_CAN' was here
+  163 |     Send_LIN_To_CAN(&salve_rx_msg);
+      |     ^~~~~~~~~~~~~~~
+../Core/Src/UART_LIN.c: In function 'Send_LIN_To_CAN':
+../Core/Src/UART_LIN.c:250:16: error: 'can_request' undeclared (first use in this function); did you mean 'new_request'?
+  250 |  CAN_sendFrame(can_request);
+      |                ^~~~~~~~~~~
+      |                new_request
+../Core/Src/UART_LIN.c:250:16: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/UART_LIN.c:242:12: warning: variable 'can_linframe' set but not used [-Wunused-but-set-variable]
+  242 |  CAN_frame can_linframe = {0};
+      |            ^~~~~~~~~~~~
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:189:1: warning: control reaches end of non-void function [-Wreturn-type]
+  189 | }
+      | ^
+make: *** [Core/Src/subdir.mk:49: Core/Src/UART_LIN.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:12:42 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:163:5: warning: implicit declaration of function 'Send_LIN_To_CAN' [-Wimplicit-function-declaration]
+  163 |     Send_LIN_To_CAN(&salve_rx_msg);
+      |     ^~~~~~~~~~~~~~~
+../Core/Src/UART_LIN.c: At top level:
+../Core/Src/UART_LIN.c:241:6: warning: conflicting types for 'Send_LIN_To_CAN'
+  241 | void Send_LIN_To_CAN(LINMSG* salve_rx_msg){
+      |      ^~~~~~~~~~~~~~~
+../Core/Src/UART_LIN.c:163:5: note: previous implicit declaration of 'Send_LIN_To_CAN' was here
+  163 |     Send_LIN_To_CAN(&salve_rx_msg);
+      |     ^~~~~~~~~~~~~~~
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:189:1: warning: control reaches end of non-void function [-Wreturn-type]
+  189 | }
+      | ^
+arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CAN.elf
+ 
+arm-none-eabi-size   CAN.elf 
+arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
+   text	   data	    bss	    dec	    hex	filename
+  13676	    132	   1644	  15452	   3c5c	CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: CAN.list
+ 
+10:13:30 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:67:12: warning: variable 'frame' set but not used [-Wunused-but-set-variable]
+   67 |  CAN_frame frame;
+      |            ^~~~~
+In file included from ../Core/Inc/main.h:35,
+                 from ../Core/Src/stm32f4xx_hal_msp.c:22:
+../Core/Inc/UART_LIN.h:41:13: warning: 'SendHeader' declared 'static' but never defined [-Wunused-function]
+   41 | static void SendHeader(uint8_t ID);
+      |             ^~~~~~~~~~
+../Core/Inc/UART_LIN.h:42:13: warning: 'SendResponse' declared 'static' but never defined [-Wunused-function]
+   42 | static void SendResponse();
+      |             ^~~~~~~~~~~~
+../Core/Inc/UART_LIN.h:48:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   48 | static void GPIO_Init(void);
+      |             ^~~~~~~~~
+In file included from ../Core/Inc/main.h:35,
+                 from ../Core/Src/stm32f4xx_it.c:21:
+../Core/Inc/UART_LIN.h:41:13: warning: 'SendHeader' declared 'static' but never defined [-Wunused-function]
+   41 | static void SendHeader(uint8_t ID);
+      |             ^~~~~~~~~~
+../Core/Inc/UART_LIN.h:42:13: warning: 'SendResponse' declared 'static' but never defined [-Wunused-function]
+   42 | static void SendResponse();
+      |             ^~~~~~~~~~~~
+../Core/Inc/UART_LIN.h:48:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   48 | static void GPIO_Init(void);
+      |             ^~~~~~~~~
+In file included from ../Core/Inc/main.h:35,
+                 from ../Core/Src/main.c:20:
+../Core/Src/main.c: At top level:
+../Core/Inc/UART_LIN.h:41:13: warning: 'SendHeader' declared 'static' but never defined [-Wunused-function]
+   41 | static void SendHeader(uint8_t ID);
+      |             ^~~~~~~~~~
+../Core/Inc/UART_LIN.h:42:13: warning: 'SendResponse' declared 'static' but never defined [-Wunused-function]
+   42 | static void SendResponse();
+      |             ^~~~~~~~~~~~
+../Core/Inc/UART_LIN.h:48:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   48 | static void GPIO_Init(void);
+      |             ^~~~~~~~~
+../Core/Src/main.c:50:13: warning: 'MX_GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   50 | static void MX_GPIO_Init(void);
+      |             ^~~~~~~~~~~~
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:189:1: warning: control reaches end of non-void function [-Wreturn-type]
+  189 | }
+      | ^
+arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CAN.elf
+ 
+arm-none-eabi-size   CAN.elf 
+arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
+   text	   data	    bss	    dec	    hex	filename
+  13676	    132	   1644	  15452	   3c5c	CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: CAN.list
+ 
+10:14:30 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:67:12: warning: variable 'frame' set but not used [-Wunused-but-set-variable]
+   67 |  CAN_frame frame;
+      |            ^~~~~
+In file included from ../Core/Inc/main.h:35,
+                 from ../Core/Src/main.c:20:
+../Core/Src/main.c: At top level:
+../Core/Inc/UART_LIN.h:41:13: warning: 'SendHeader' declared 'static' but never defined [-Wunused-function]
+   41 | static void SendHeader(uint8_t ID);
+      |             ^~~~~~~~~~
+../Core/Inc/UART_LIN.h:42:13: warning: 'SendResponse' declared 'static' but never defined [-Wunused-function]
+   42 | static void SendResponse();
+      |             ^~~~~~~~~~~~
+../Core/Inc/UART_LIN.h:48:13: warning: 'GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   48 | static void GPIO_Init(void);
+      |             ^~~~~~~~~
+../Core/Src/main.c:50:13: warning: 'MX_GPIO_Init' declared 'static' but never defined [-Wunused-function]
+   50 | static void MX_GPIO_Init(void);
+      |             ^~~~~~~~~~~~
+arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CAN.elf
+ 
+arm-none-eabi-size   CAN.elf 
+arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
+   text	   data	    bss	    dec	    hex	filename
+  12032	    132	   1644	  13808	   35f0	CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: CAN.list
+ 
+10:14:35 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-size   CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+  12032	    132	   1644	  13808	   35f0	CAN.elf
+Finished building: default.size.stdout
+ 
+10:14:41 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-size   CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+  12032	    132	   1644	  13808	   35f0	CAN.elf
+Finished building: default.size.stdout
+ 
+10:16:08 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:188:1: warning: control reaches end of non-void function [-Wreturn-type]
+  188 | }
+      | ^
+arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CAN.elf
+ 
+arm-none-eabi-size   CAN.elf 
+arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
+   text	   data	    bss	    dec	    hex	filename
+  12040	    132	   1644	  13816	   35f8	CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: CAN.list
+ 
+10:18:41 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-size   CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+  12040	    132	   1644	  13816	   35f8	CAN.elf
+Finished building: default.size.stdout
+ 
+10:19:27 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:189:1: warning: control reaches end of non-void function [-Wreturn-type]
+  189 | }
+      | ^
+arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CAN.elf
+ 
+arm-none-eabi-size   CAN.elf 
+arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
+   text	   data	    bss	    dec	    hex	filename
+  12044	    132	   1644	  13820	   35fc	CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: CAN.list
+ 
+10:19:56 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:189:1: warning: control reaches end of non-void function [-Wreturn-type]
+  189 | }
+      | ^
+arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CAN.elf
+ 
+arm-none-eabi-size   CAN.elf 
+arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
+   text	   data	    bss	    dec	    hex	filename
+  12044	    132	   1644	  13820	   35fc	CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: CAN.list
+ 
+10:20:33 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-size   CAN.elf 
+   text	   data	    bss	    dec	    hex	filename
+  12044	    132	   1644	  13820	   35fc	CAN.elf
+Finished building: default.size.stdout
+ 
+10:21:49 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:189:1: warning: control reaches end of non-void function [-Wreturn-type]
+  189 | }
+      | ^
+arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CAN.elf
+ 
+arm-none-eabi-size   CAN.elf 
+arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
+   text	   data	    bss	    dec	    hex	filename
+  12040	    132	   1644	  13816	   35f8	CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: CAN.list
+ 
+10:24:31 **** Incremental Build of configuration Debug for project CAN ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/UART_LIN.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/UART_LIN.d" -MT"Core/Src/UART_LIN.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/UART_LIN.o"
+../Core/Src/UART_LIN.c: In function 'slave_response':
+../Core/Src/UART_LIN.c:189:1: warning: control reaches end of non-void function [-Wreturn-type]
+  189 | }
+      | ^
+arm-none-eabi-gcc -o "CAN.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/hender/STM32CubeIDE/workspace_1.12.0/CAN/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CAN.elf
+ 
+arm-none-eabi-size   CAN.elf 
+arm-none-eabi-objdump -h -S  CAN.elf  > "CAN.list"
+   text	   data	    bss	    dec	    hex	filename
+  12040	    132	   1644	  13816	   35f8	CAN.elf
+Finished building: default.size.stdout
+ 
+Finished building: CAN.list
+ 
