@@ -9,6 +9,8 @@
 
 //Is used in slave mode
 int sync_counter = -1;
+int slave_data_counter = -1;
+LINMSG salve_rx_msg;
 
 
 //Functions
@@ -145,11 +147,26 @@ void sync_break(void){
  * This function is called at each interrupt
  * It's used when the card is in slave mode
  * It's role is to generate a response to the request of the master
+ * TODO implement a way to handle error while comparing checksum
  * */
 int slave_response(void){
 	//sync_counter is used to determine whether we recived the sync byte or not
-	serial_putc(USART3->DR);
-
+	if (slave_data_counter > -1){
+		if (slave_data_counter <3){ //We predefined a message with 3 data field
+			salve_rx_msg.data[slave_data_counter++] = USART3->DR;
+			return 1;
+		}else{
+			salve_rx_msg.checksum = USART3->DR;
+			salve_rx_msg.length = slave_data_counter;
+			slave_data_counter = -1; //reseting the counter
+			if (checksum(salve_rx_msg.length,salve_rx_msg.data) == salve_rx_msg.checksum){
+				Send_LIN_To_CAN(&salve_rx_msg);
+				return 1;
+			}else{
+				return -1;
+			}
+		}
+	}
 	if(sync_counter == -1){
 		if(USART3->DR == 0x55){ //Check it is the sync byte (value 0x55)
 			sync_counter = 0;
@@ -161,8 +178,13 @@ int slave_response(void){
 	if(sync_counter == 0){ //We received the sync byte
 		//TODO
 		if (USART3->DR == SLAVE_ADDR_WRITE){ //If we recied a request for the RTC
-			Send_RTC();
-			return 0;
+			LINMSG frame;
+			frame = Send_RTC();
+			SendResponse(&frame);
+			return 1;
+		}else if (USART3->DR == SLAVE_ADDR_READ){
+			slave_data_counter = 0; //This will make us fetch the lin data
+			return 1;
 		}
 		//ADD the different behavior as a slave based on the address
 	}
@@ -192,7 +214,12 @@ uint8_t checksum(uint8_t length, uint8_t *data){
 	return (uint8_t)(0xff - check_sum);
 }
 
-void Send_RTC(){
+
+/*
+ * THis function read the time from the rtc (it assume you already init it in the main)
+ * And then it generate a LIN frame containing the inforamation
+ * */
+LINMSG Make_RTC_LIN_Frame(){
 
 	// Read date and time registers
 	uint32_t time_tmp_reg = RTC->TR;
@@ -215,7 +242,36 @@ void Send_RTC(){
 	response.data[4] = month;
 	response.data[5] = year;
 	response.checksum = checksum(6,response.data);
-	SendResponse(&response);
+	return response;
+}
+
+
+/*
+ * This function takes a LIN frame, and send the same data to CAN
+ * */
+void Send_LIN_To_CAN(LINMSG* salve_rx_msg){
+	CAN_frame can_linframe = {0};
+	can_linframe.IDE = 1;
+	can_linframe.ID = 0x11111111; //TODO maybe find another ID
+	can_linframe.RTR = 0;
+	can_linframe.DLC = salve_rx_msg->length;
+	for (int i=0; i<salve_rx_msg->length;i++){
+		can_linframe.data[i] = salve_rx_msg->data[i];
+	}
+	CAN_sendFrame(can_linframe);
+
+}
+
+/*
+ * Used as a master, it ask the slave for the RTC (or any other value corresponding to the ID)
+ * And sends it back to the can
+ *
+ * */
+void Ask_RTC(int8_t ID){
+	LINMSG askrtcframe;
+	askrtcframe.ID = ID;
+	SendRequest(askrtcframe); //Asking the slave
+	Send_LIN_To_CAN(&askrtcframe); //The frame has been provided with the data, we send it to CAN
 }
 
 

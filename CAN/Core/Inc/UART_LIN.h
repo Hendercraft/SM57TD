@@ -11,6 +11,7 @@
 #include "stm32f4xx.h"
 #include "usart2.h" //Used to display error message
 #include "rtc.h"
+#include "can.h"
 
 //Declaration to Link External Functions & Variables:
 
@@ -31,7 +32,7 @@ extern  LINMSG Rx_Msg;
 extern int new_request;
 
 #define SLAVE_ADDR_WRITE 0x73
-#define SLAVE_ADDR_READ 0x11
+#define SLAVE_ADDR_READ 0x72
 
 //Functions :
 void USART3_IRQHandler(void);
@@ -47,7 +48,10 @@ uint8_t checksum(uint8_t length, uint8_t *data);
 static void GPIO_Init(void);
 int8_t ResponseToRequest(LINMSG *msg);
 
-void Send_RTC();
+
+/*Function used in slave mode*/
+LINMSG Make_RTC_LIN_Frame();
+void Send_LIN_To_CAN(LINMSG* salve_rx_msg);
 
 
 
