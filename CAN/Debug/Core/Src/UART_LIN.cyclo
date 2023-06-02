@@ -9,8 +9,9 @@ UART_LIN.c:112:13:SendResponse	2
 UART_LIN.c:123:8:ResponseToRequest	4
 UART_LIN.c:138:6:sync_break	3
 UART_LIN.c:152:5:slave_response	9
-UART_LIN.c:193:6:UART_PutChar	3
-UART_LIN.c:202:9:checksum	3
-UART_LIN.c:215:6:Send_RTC	1
-UART_LIN.c:241:6:Send_LIN_To_CAN	2
-UART_LIN.c:255:6:USART3_IRQHandler	3
+UART_LIN.c:195:6:UART_PutChar	3
+UART_LIN.c:204:9:checksum	3
+UART_LIN.c:222:8:Make_RTC_LIN_Frame	1
+UART_LIN.c:252:6:Send_LIN_To_CAN	2
+UART_LIN.c:270:6:Ask_RTC	1
+UART_LIN.c:278:6:USART3_IRQHandler	3

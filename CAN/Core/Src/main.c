@@ -99,7 +99,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   CAN_GPIO_Init();
   CAN_Counter_Init();
-  UART_Init();
+  //UART_Init();
   //UART_Init_test();
 
   //2.3
@@ -114,14 +114,13 @@ int main(void)
   //uint32_t Mask_ID = (0x524010 << 3) | 0x4;
   //CAN_config(1, 1, Filter_ID >> 16, Filter_ID & 0xFFFF, Mask_ID >> 16, Mask_ID & 0xFFFF);
   //CAN_config(1, 0, 0x524, 0x010,0 , 0);
-
+  CAN_sendFrame(frame);
   /* USER CODE END 2 */
   __enable_irq();
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1){
     /* USER CODE END WHILE */
-
     /* USER CODE BEGIN 3 *     */
 
   }

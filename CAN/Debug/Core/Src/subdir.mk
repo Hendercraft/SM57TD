@@ -5,6 +5,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Core/Src/RUFF_EHLINGER_comodos.c \
 ../Core/Src/UART_LIN.c \
 ../Core/Src/can.c \
 ../Core/Src/circularbuffer.c \
@@ -18,6 +19,7 @@ C_SRCS += \
 ../Core/Src/usart2.c 
 
 OBJS += \
+./Core/Src/RUFF_EHLINGER_comodos.o \
 ./Core/Src/UART_LIN.o \
 ./Core/Src/can.o \
 ./Core/Src/circularbuffer.o \
@@ -31,6 +33,7 @@ OBJS += \
 ./Core/Src/usart2.o 
 
 C_DEPS += \
+./Core/Src/RUFF_EHLINGER_comodos.d \
 ./Core/Src/UART_LIN.d \
 ./Core/Src/can.d \
 ./Core/Src/circularbuffer.d \
@@ -51,7 +54,7 @@ Core/Src/%.o Core/Src/%.su Core/Src/%.cyclo: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/UART_LIN.cyclo ./Core/Src/UART_LIN.d ./Core/Src/UART_LIN.o ./Core/Src/UART_LIN.su ./Core/Src/can.cyclo ./Core/Src/can.d ./Core/Src/can.o ./Core/Src/can.su ./Core/Src/circularbuffer.cyclo ./Core/Src/circularbuffer.d ./Core/Src/circularbuffer.o ./Core/Src/circularbuffer.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/rtc.cyclo ./Core/Src/rtc.d ./Core/Src/rtc.o ./Core/Src/rtc.su ./Core/Src/stm32f4xx_hal_msp.cyclo ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.cyclo ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.cyclo ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su ./Core/Src/usart2.cyclo ./Core/Src/usart2.d ./Core/Src/usart2.o ./Core/Src/usart2.su
+	-$(RM) ./Core/Src/RUFF_EHLINGER_comodos.cyclo ./Core/Src/RUFF_EHLINGER_comodos.d ./Core/Src/RUFF_EHLINGER_comodos.o ./Core/Src/RUFF_EHLINGER_comodos.su ./Core/Src/UART_LIN.cyclo ./Core/Src/UART_LIN.d ./Core/Src/UART_LIN.o ./Core/Src/UART_LIN.su ./Core/Src/can.cyclo ./Core/Src/can.d ./Core/Src/can.o ./Core/Src/can.su ./Core/Src/circularbuffer.cyclo ./Core/Src/circularbuffer.d ./Core/Src/circularbuffer.o ./Core/Src/circularbuffer.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/rtc.cyclo ./Core/Src/rtc.d ./Core/Src/rtc.o ./Core/Src/rtc.su ./Core/Src/stm32f4xx_hal_msp.cyclo ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.cyclo ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.cyclo ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su ./Core/Src/usart2.cyclo ./Core/Src/usart2.d ./Core/Src/usart2.o ./Core/Src/usart2.su
 
 .PHONY: clean-Core-2f-Src
 

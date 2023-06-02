@@ -179,7 +179,7 @@ int slave_response(void){
 		//TODO
 		if (USART3->DR == SLAVE_ADDR_WRITE){ //If we recied a request for the RTC
 			LINMSG frame;
-			frame = Send_RTC();
+			frame = Make_RTC_LIN_Frame();
 			SendResponse(&frame);
 			return 1;
 		}else if (USART3->DR == SLAVE_ADDR_READ){
@@ -270,7 +270,7 @@ void Send_LIN_To_CAN(LINMSG* salve_rx_msg){
 void Ask_RTC(int8_t ID){
 	LINMSG askrtcframe;
 	askrtcframe.ID = ID;
-	SendRequest(askrtcframe); //Asking the slave
+	SendRequest(&askrtcframe); //Asking the slave
 	Send_LIN_To_CAN(&askrtcframe); //The frame has been provided with the data, we send it to CAN
 }
 
