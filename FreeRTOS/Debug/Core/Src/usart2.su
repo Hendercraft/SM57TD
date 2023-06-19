@@ -1,0 +1,14 @@
+../Drivers/CMSIS/Include/core_cm4.h:1676:26:__NVIC_GetPriorityGrouping	4	static
+../Drivers/CMSIS/Include/core_cm4.h:1688:22:__NVIC_EnableIRQ	16	static
+../Drivers/CMSIS/Include/core_cm4.h:1816:22:__NVIC_SetPriority	16	static
+../Drivers/CMSIS/Include/core_cm4.h:1863:26:NVIC_EncodePriority	40	static
+../Core/Src/usart2.c:19:6:init_usart	8	static
+../Core/Src/usart2.c:60:6:init_usart_int	8	static
+../Core/Src/usart2.c:101:6:serial_putc	16	static
+../Core/Src/usart2.c:109:6:serial_puts	24	static
+../Core/Src/usart2.c:118:6:newLine	8	static
+../Core/Src/usart2.c:125:12:string2int	32	static
+../Core/Src/usart2.c:160:8:int2string	40	static
+../Core/Src/usart2.c:193:8:float2string	48	static
+../Core/Src/usart2.c:235:6:USART2_IRQHandler	16	static
+../Core/Src/usart2.c:251:6:handleTrameReceived	24	static

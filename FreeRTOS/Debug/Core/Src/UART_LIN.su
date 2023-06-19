@@ -1,0 +1,16 @@
+../Drivers/CMSIS/Include/core_cm4.h:1688:22:__NVIC_EnableIRQ	16	static
+../Drivers/CMSIS/Include/core_cm4.h:1724:22:__NVIC_DisableIRQ	16	static,ignoring_inline_asm
+../Core/Src/UART_LIN.c:20:6:UART_Init	16	static,ignoring_inline_asm
+../Core/Src/UART_LIN.c:57:13:GPIO_Init	4	static
+../Core/Src/UART_LIN.c:83:6:SendMessage	16	static
+../Core/Src/UART_LIN.c:97:6:SendRequest	24	static
+../Core/Src/UART_LIN.c:107:13:SendHeader	16	static
+../Core/Src/UART_LIN.c:112:13:SendResponse	24	static
+../Core/Src/UART_LIN.c:123:8:ResponseToRequest	24	static
+../Core/Src/UART_LIN.c:138:6:sync_break	8	static
+../Core/Src/UART_LIN.c:152:5:slave_response	48	static
+../Core/Src/UART_LIN.c:195:6:UART_PutChar	16	static
+../Core/Src/UART_LIN.c:204:9:checksum	24	static
+../Core/Src/UART_LIN.c:222:8:Make_RTC_LIN_Frame	56	static
+../Core/Src/UART_LIN.c:252:6:Send_LIN_To_CAN	40	static
+../Core/Src/UART_LIN.c:270:6:Ask_RTC	32	static

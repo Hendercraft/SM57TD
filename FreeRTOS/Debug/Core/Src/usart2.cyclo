@@ -1,0 +1,14 @@
+core_cm4.h:1676:26:__NVIC_GetPriorityGrouping	1
+core_cm4.h:1688:22:__NVIC_EnableIRQ	2
+core_cm4.h:1816:22:__NVIC_SetPriority	2
+core_cm4.h:1863:26:NVIC_EncodePriority	2
+usart2.c:19:6:init_usart	1
+usart2.c:60:6:init_usart_int	1
+usart2.c:101:6:serial_putc	3
+usart2.c:109:6:serial_puts	2
+usart2.c:118:6:newLine	1
+usart2.c:125:12:string2int	8
+usart2.c:160:8:int2string	5
+usart2.c:193:8:float2string	6
+usart2.c:235:6:USART2_IRQHandler	8
+usart2.c:251:6:handleTrameReceived	1

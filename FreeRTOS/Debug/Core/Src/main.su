@@ -1,0 +1,12 @@
+../Core/Src/main.c:83:5:main	288	static
+../Core/Src/main.c:202:6:SystemClock_Config	88	static
+../Core/Src/main.c:248:13:MX_GPIO_Init	16	static
+../Core/Src/main.c:272:6:StartDefaultTask	16	static
+../Core/Src/main.c:290:6:can_reception	32	static
+../Core/Src/main.c:309:6:can_send	32	static
+../Core/Src/main.c:333:6:can_process	32	static
+../Core/Src/main.c:360:6:lin_reception	16	static
+../Core/Src/main.c:378:6:lin_process	16	static
+../Core/Src/main.c:396:6:lin_send	16	static
+../Core/Src/main.c:415:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/main.c:432:6:Error_Handler	4	static,ignoring_inline_asm

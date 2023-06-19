@@ -1,0 +1,2 @@
+../Core/Src/int.c:11:6:CAN1_RX0_IRQHandler	8	static
+../Core/Src/int.c:24:6:USART3_IRQHandler	8	static
