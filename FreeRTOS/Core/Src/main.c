@@ -32,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define LIN_MODE 1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -45,14 +45,21 @@ osThreadId defaultTaskHandle;
 osThreadId Task_can_receptHandle;
 osThreadId Task_can_sendHandle;
 osThreadId Task_can_procesHandle;
-osThreadId Task_lin_receptHandle;
 osThreadId Task_lin_procesHandle;
 osThreadId Task_lin_sendHandle;
-osMessageQId canFrameReceptionQueueHandle;
-osMessageQId canFrameSendQueueHandle;
-osMessageQId linFrameSendQueueHandle;
-osMessageQId linFrameReceptionQueueHandle;
+osTimerId Timer_Ask_comodoHandle;
+osSemaphoreId CanRxSemaphoreHandle;
+osSemaphoreId CanTxSemaphoreHandle;
+osSemaphoreId LinRxSemaphoreHandle;
+osSemaphoreId LinTxSemaphoreHandle;
 /* USER CODE BEGIN PV */
+CircularBufferCan* CanTxBuffer;
+CircularBufferCan* CanRxBuffer;
+CircularBufferLin* LinTxBuffer;
+CircularBufferLin* LinRxBuffer;
+
+CAN_frame Ask_comodo_frame; //RTC frame sent to the comodo
+
 
 /* USER CODE END PV */
 
@@ -63,9 +70,9 @@ void StartDefaultTask(void const * argument);
 void can_reception(void const * argument);
 void can_send(void const * argument);
 void can_process(void const * argument);
-void lin_reception(void const * argument);
 void lin_process(void const * argument);
 void lin_send(void const * argument);
+void ask_comodo(void const * argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -73,7 +80,27 @@ void lin_send(void const * argument);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+// Interrupt handler for CAN1 RX0
+void CAN1_RX0_IRQHandler(void)
+{
+    if (CAN1->RF0R & CAN_RF0R_FMP0) // check if there is a message in the FIFO
+    {
+    	 // clear the message from the FIFO
+    	CAN1->RF0R |= CAN_RF0R_RFOM0;
 
+        // send a message to task
+        osSignalSet(Task_can_receptHandle, 0x01);
+
+    }
+}
+
+void USART3_IRQHandler(void)
+{
+		if(USART3->SR & USART_SR_RXNE || USART3->SR & USART_SR_LBD_Msk){
+			slave_response();
+		}
+
+}
 /* USER CODE END 0 */
 
 /**
@@ -83,6 +110,15 @@ void lin_send(void const * argument);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+	CanTxBuffer = getNewBufferCan();
+	CanRxBuffer = getNewBufferCan();
+	LinTxBuffer = getNewBufferLin();
+	LinRxBuffer = getNewBufferLin();
+
+	Ask_comodo_frame.ID = 0x10510111;
+	Ask_comodo_frame.RTR = 1;
+	Ask_comodo_frame.IDE = 1;
+	Ask_comodo_frame.DLC = 0;
 
   /* USER CODE END 1 */
 
@@ -97,7 +133,7 @@ int main(void)
   //2.3
   //32bit mode, list mode
   //ID = 0x010,standard ID, accept both data and request frame
-  CAN_config(1,1,(0x10 << 5),0x2,(0x10 << 5),0x00);
+  CAN_config(1,1,(0x10 << 5),0x2,(0x10 << 5),0x00); //TODO init with right ID
 
 
   /* USER CODE END Init */
@@ -119,30 +155,35 @@ int main(void)
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
 
+  /* Create the semaphores(s) */
+  /* definition and creation of CanRxSemaphore */
+  osSemaphoreDef(CanRxSemaphore);
+  CanRxSemaphoreHandle = osSemaphoreCreate(osSemaphore(CanRxSemaphore), 10);
+
+  /* definition and creation of CanTxSemaphore */
+  osSemaphoreDef(CanTxSemaphore);
+  CanTxSemaphoreHandle = osSemaphoreCreate(osSemaphore(CanTxSemaphore), 10);
+
+  /* definition and creation of LinRxSemaphore */
+  osSemaphoreDef(LinRxSemaphore);
+  LinRxSemaphoreHandle = osSemaphoreCreate(osSemaphore(LinRxSemaphore), 10);
+
+  /* definition and creation of LinTxSemaphore */
+  osSemaphoreDef(LinTxSemaphore);
+  LinTxSemaphoreHandle = osSemaphoreCreate(osSemaphore(LinTxSemaphore), 10);
+
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
   /* USER CODE END RTOS_SEMAPHORES */
 
+  /* Create the timer(s) */
+  /* definition and creation of Timer_Ask_comodo */
+  osTimerDef(Timer_Ask_comodo, ask_comodo);
+  Timer_Ask_comodoHandle = osTimerCreate(osTimer(Timer_Ask_comodo), osTimerPeriodic, NULL);
+
   /* USER CODE BEGIN RTOS_TIMERS */
   /* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
-
-  /* Create the queue(s) */
-  /* definition and creation of canFrameReceptionQueue */
-  osMessageQDef(canFrameReceptionQueue, 16, CAN_frame);
-  canFrameReceptionQueueHandle = osMessageCreate(osMessageQ(canFrameReceptionQueue), NULL);
-
-  /* definition and creation of canFrameSendQueue */
-  osMessageQDef(canFrameSendQueue, 16, CAN_frame);
-  canFrameSendQueueHandle = osMessageCreate(osMessageQ(canFrameSendQueue), NULL);
-
-  /* definition and creation of linFrameSendQueue */
-  osMessageQDef(linFrameSendQueue, 16, LINMSG);
-  linFrameSendQueueHandle = osMessageCreate(osMessageQ(linFrameSendQueue), NULL);
-
-  /* definition and creation of linFrameReceptionQueue */
-  osMessageQDef(linFrameReceptionQueue, 16, LINMSG);
-  linFrameReceptionQueueHandle = osMessageCreate(osMessageQ(linFrameReceptionQueue), NULL);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -164,10 +205,6 @@ int main(void)
   /* definition and creation of Task_can_proces */
   osThreadDef(Task_can_proces, can_process, osPriorityNormal, 0, 128);
   Task_can_procesHandle = osThreadCreate(osThread(Task_can_proces), NULL);
-
-  /* definition and creation of Task_lin_recept */
-  osThreadDef(Task_lin_recept, lin_reception, osPriorityHigh, 0, 128);
-  Task_lin_receptHandle = osThreadCreate(osThread(Task_lin_recept), NULL);
 
   /* definition and creation of Task_lin_proces */
   osThreadDef(Task_lin_proces, lin_process, osPriorityNormal, 0, 128);
@@ -283,6 +320,8 @@ void StartDefaultTask(void const * argument)
 /* USER CODE BEGIN Header_can_reception */
 /**
 * @brief Function implementing the Task_can_recept thread.
+* This Task fetch can frame when it's given a signal by a CAN_RX interrupt
+* Once it has fetch the frame, it adds it to a cricular buffer, and release a semaphore so it can be processed
 * @param argument: Not used
 * @retval None
 */
@@ -293,8 +332,10 @@ void can_reception(void const * argument)
   /* Infinite loop */
   for(;;)
   {
+	osSignalWait(0,0); //wait for the interruption to generate a signal
     CAN_frame recived_frame = CAN_frameFetch(); //Fetch the frame from the DR
-    osEvent event = osMessagePut(canFrameReceptionQueueHandle,osWaitForever);
+    pushToBufferCan(CanRxBuffer,recived_frame);
+    osSemaphoreRelease(CanRxSemaphoreHandle); //Release the semaphore so the frame can be processed
   }
   /* USER CODE END can_reception */
 }
@@ -302,6 +343,8 @@ void can_reception(void const * argument)
 /* USER CODE BEGIN Header_can_send */
 /**
 * @brief Function implementing the Task_can_send thread.
+* This Task wait for a semaphore that is released each time a frame is added to the TxBuffer
+* It then fetch this frame and send it to the bus
 * @param argument: Not used
 * @retval None
 */
@@ -312,13 +355,10 @@ void can_send(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-	  osEvent event = osMessageGet(canFrameSendQueueHandle, osWaitForever);
-	 	  if (event.status == osEventMessage)
-	 	  {
-	 		  // Extract the CAN frame from the event message
-	 		  CAN_frame *frame = (CAN_frame *)(event.value.p); //TODO check if the queue needs to be emptied
-	 		  CAN_sendFrame(*frame);
-	 	  }
+	  osSemaphoreWait(CanTxSemaphoreHandle,0); //Waiting for a semaphore
+	  CAN_frame *frame;
+	  pullFromBufferCan(CanTxBuffer,frame); //Fetching the frame from the buffer
+	  CAN_sendFrame(*frame); //Sending the frame
   }
   /* USER CODE END can_send */
 }
@@ -332,40 +372,43 @@ void can_send(void const * argument)
 /* USER CODE END Header_can_process */
 void can_process(void const * argument)
 {
+	osTimerStart (Timer_Ask_comodoHandle,500);// Activate the timer to ask the comodo every 500ms
   /* USER CODE BEGIN can_process */
   /* Infinite loop */
   for(;;)
   {
 	  // Fetch a CAN frame from the queue
-	  osEvent event = osMessageGet(canFrameReceptionQueueHandle, osWaitForever);
-	  if (event.status == osEventMessage)
-	  {
-		  // Extract the CAN frame from the event message
-		  CAN_frame *receivedFrame = (CAN_frame *)(event.value.p);//TODO check if the queue needs to be emptied
+	  osSemaphoreWait(CanRxSemaphoreHandle,0); //Waiting for a semaphore
+	  CAN_frame *frame;
+	  pullFromBufferCan(CanRxBuffer,frame);
+	  if(frame->ID == 0x10015111){ //If it's the response from the comodo
+		  serial_puts("Recived a CAN frame with comodo info\r\n");
+		  serial_puts("Sending a LIN frame containing the info\r\n");
 
-		  // Perform processing with the received CAN frame
-		  // ...
+		  //*Sending the info via LIN*//
+		  LINMSG lin_frame;
+		  lin_frame.ID = 0x44;
+		  lin_frame.length = 1;
+		  lin_frame.data[0] = frame->data[0];
+		  lin_frame.checksum = checksum(1,lin_frame.data);
+
+		  //Puting the frame in the buffer
+		  pushToBufferLin(LinTxBuffer,lin_frame);
+		  //Unblocking the sendLin
+		  osSemaphoreRelease(LinTxSemaphoreHandle);
+	  }else if(frame->ID == 0x10015112){
+
+		  //*Sending the info via LIN*//
+		  LINMSG* lin_frame;
+		  lin_frame->ID = SLAVE_ADDR_READ;
+		  lin_frame->length = 1;
+		  lin_frame->data[0] = frame->data[0];
+		  lin_frame->checksum = checksum(1,lin_frame->data);
+		  SendMessage(lin_frame,0); //Sending the message manually as it's in "slave mode"
+
 	  }
   }
   /* USER CODE END can_process */
-}
-
-/* USER CODE BEGIN Header_lin_reception */
-/**
-* @brief Function implementing the Task_lin_recept thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_lin_reception */
-void lin_reception(void const * argument)
-{
-  /* USER CODE BEGIN lin_reception */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END lin_reception */
 }
 
 /* USER CODE BEGIN Header_lin_process */
@@ -375,15 +418,25 @@ void lin_reception(void const * argument)
 * @retval None
 */
 /* USER CODE END Header_lin_process */
-void lin_process(void const * argument){
+void lin_process(void const * argument)
+{
   /* USER CODE BEGIN lin_process */
   /* Infinite loop */
   for(;;){
-	  osEvent event = osMessageGet(linFrameReceptionQueueHandle, osWaitForever);
-	  if (event.status == osEventMessage){
-		  // Extract the lIN frame from the event message
-		  LINMSG *frame = (LINMSG *)(event.value.p); //TODO check if the queue needs to be emptied
-		  //TODO Process the Frame
+	  osSemaphoreWait(LinRxSemaphoreHandle,0);
+	  LINMSG* frame;
+	  pullFromBufferLin(LinRxBuffer,frame);
+	  if (frame->ID == SLAVE_ADDR_READ){
+		  serial_puts("Received a request via LIN");
+		  serial_puts("Asking the comodo via can and sending the result back");
+
+		  CAN_frame can_frame;
+		  can_frame.ID = 0x10510112;
+		  can_frame.RTR = 1;
+		  can_frame.IDE = 1;
+		  can_frame.DLC = 0;
+		  pushToBufferCan(CanTxBuffer,can_frame);
+		  osSemaphoreRelease(CanTxSemaphoreHandle);
 	  }
   }
   /* USER CODE END lin_process */
@@ -396,18 +449,25 @@ void lin_process(void const * argument){
 * @retval None
 */
 /* USER CODE END Header_lin_send */
-void lin_send(void const * argument){
-	/* USER CODE BEGIN lin_send */
+void lin_send(void const * argument)
+{
+  /* USER CODE BEGIN lin_send */
 	/* Infinite loop */
 	for(;;){
-		osEvent event = osMessageGet(linFrameSendQueueHandle, osWaitForever);
-		if (event.status == osEventMessage){
-			// Extract the lIN frame from the event message
-			LINMSG *frame = (LINMSG *)(event.value.p); //TODO check if the queue needs to be emptied
-			SendMessage(*frame,1);
-		}
+		osSemaphoreWait(LinTxSemaphoreHandle,0); //Waiting for a semaphore
+		LINMSG* frame;
+		pullFromBufferLin(LinTxBuffer,frame);
+		SendMessage(frame,LIN_MODE);
 	}
-	/* USER CODE END lin_send */
+  /* USER CODE END lin_send */
+}
+
+/* ask_comodo function */
+void ask_comodo(void const * argument)
+{
+  /* USER CODE BEGIN ask_comodo */
+	CAN_sendFrame(Ask_comodo_frame);
+  /* USER CODE END ask_comodo */
 }
 
 /**

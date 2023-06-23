@@ -6,7 +6,7 @@
  */
 
 #ifndef UART_LIN_H
-#define	UART__LIN_H
+#define	UART_LIN_H
 
 #include "stm32f4xx.h"
 #include "usart2.h" //Used to display error message

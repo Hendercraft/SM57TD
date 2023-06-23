@@ -28,6 +28,8 @@
 /* Standard includes. */
 #include <stdlib.h>
 #include <string.h>
+#include "stm32f4xx.h"
+
 
 /* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
 all the API functions to use the MPU wrappers.  That should only be done when
@@ -3407,7 +3409,7 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 		/* See if any tasks have deleted themselves - if so then the idle task
 		is responsible for freeing the deleted task's TCB and stack. */
 		prvCheckTasksWaitingTermination();
-
+		__WFI();
 		#if ( configUSE_PREEMPTION == 0 )
 		{
 			/* If we are not using preemption we keep forcing a task switch to

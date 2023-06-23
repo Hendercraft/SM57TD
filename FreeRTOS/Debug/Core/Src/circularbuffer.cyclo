@@ -1,0 +1,6 @@
+circularbuffer.c:17:20:getNewBufferCan	1
+circularbuffer.c:26:20:getNewBufferLin	1
+circularbuffer.c:35:5:pushToBufferCan	3
+circularbuffer.c:53:5:pullFromBufferCan	3
+circularbuffer.c:72:5:pushToBufferLin	3
+circularbuffer.c:90:5:pullFromBufferLin	3

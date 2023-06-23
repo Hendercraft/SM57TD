@@ -2,11 +2,14 @@
 CAD.formats=
 CAD.pinconfig=
 CAD.provider=
+FREERTOS.CountingSemaphores01=CanRxSemaphore,10,Dynamic,NULL;CanTxSemaphore,10,Dynamic,NULL;LinRxSemaphore,10,Dynamic,NULL;LinTxSemaphore,10,Dynamic,NULL
 FREERTOS.FootprintOK=true
-FREERTOS.IPParameters=Tasks01,configUSE_NEWLIB_REENTRANT,Queues01,FootprintOK
-FREERTOS.Queues01=canFrameReceptionQueue,16,CAN_frame,0,Dynamic,NULL,NULL;canFrameSendQueue,16,CAN_frame,0,Dynamic,NULL,NULL;linFrameSendQueue,16,LINMSG,0,Dynamic,NULL,NULL;linFrameReceptionQueue,16,LINMSG,0,Dynamic,NULL,NULL
-FREERTOS.Tasks01=defaultTask,0,128,StartDefaultTask,Default,NULL,Dynamic,NULL,NULL;Task_can_recept,2,128,can_reception,Default,NULL,Dynamic,NULL,NULL;Task_can_send,2,128,can_send,Default,NULL,Dynamic,NULL,NULL;Task_can_proces,0,128,can_process,Default,NULL,Dynamic,NULL,NULL;Task_lin_recept,2,128,lin_reception,Default,NULL,Dynamic,NULL,NULL;Task_lin_proces,0,128,lin_process,Default,NULL,Dynamic,NULL,NULL;Task_lin_send,2,128,lin_send,Default,NULL,Dynamic,NULL,NULL
+FREERTOS.IPParameters=Tasks01,configUSE_NEWLIB_REENTRANT,FootprintOK,configUSE_COUNTING_SEMAPHORES,CountingSemaphores01,configUSE_TIMERS,Timers01
+FREERTOS.Tasks01=defaultTask,0,128,StartDefaultTask,Default,NULL,Dynamic,NULL,NULL;Task_can_recept,2,128,can_reception,Default,NULL,Dynamic,NULL,NULL;Task_can_send,2,128,can_send,Default,NULL,Dynamic,NULL,NULL;Task_can_proces,0,128,can_process,Default,NULL,Dynamic,NULL,NULL;Task_lin_proces,0,128,lin_process,Default,NULL,Dynamic,NULL,NULL;Task_lin_send,2,128,lin_send,Default,NULL,Dynamic,NULL,NULL
+FREERTOS.Timers01=Timer_Ask_comodo,ask_comodo,osTimerPeriodic,Default,NULL,Dynamic,NULL
+FREERTOS.configUSE_COUNTING_SEMAPHORES=1
 FREERTOS.configUSE_NEWLIB_REENTRANT=1
+FREERTOS.configUSE_TIMERS=1
 File.Version=6
 KeepUserPlacement=false
 Mcu.CPN=STM32F407VGT6

@@ -1,0 +1,6 @@
+../Core/Src/circularbuffer.c:17:20:getNewBufferCan	16	static
+../Core/Src/circularbuffer.c:26:20:getNewBufferLin	16	static
+../Core/Src/circularbuffer.c:35:5:pushToBufferCan	16	static
+../Core/Src/circularbuffer.c:53:5:pullFromBufferCan	16	static
+../Core/Src/circularbuffer.c:72:5:pushToBufferLin	16	static
+../Core/Src/circularbuffer.c:90:5:pullFromBufferLin	16	static
